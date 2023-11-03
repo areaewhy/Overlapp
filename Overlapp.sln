@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34219.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overlapp", "Overlapp\Overlapp\Overlapp.csproj", "{DE3F1DE2-777C-4C5E-8393-94B666BA6EF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overlapp.Client", "Overlapp\Overlapp.Client\Overlapp.Client.csproj", "{B3E3D377-C38D-4808-91E3-2E9CA18F69D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE3F1DE2-777C-4C5E-8393-94B666BA6EF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE3F1DE2-777C-4C5E-8393-94B666BA6EF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE3F1DE2-777C-4C5E-8393-94B666BA6EF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE3F1DE2-777C-4C5E-8393-94B666BA6EF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3E3D377-C38D-4808-91E3-2E9CA18F69D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3E3D377-C38D-4808-91E3-2E9CA18F69D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3E3D377-C38D-4808-91E3-2E9CA18F69D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3E3D377-C38D-4808-91E3-2E9CA18F69D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F90D2EC-4652-497B-B0D5-CBA0BB8CCF5D}
+	EndGlobalSection
+EndGlobal
