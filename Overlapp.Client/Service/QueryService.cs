@@ -1,17 +1,11 @@
-﻿using Overlapp.Client.Utility;
+﻿using Overlapp.Client.Interface;
 using Overlapp.Shared.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Numerics;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Overlapp.Client.Service
 {
-	public partial class QueryService
+	public class QueryService : IQueryService
 	{
 		private readonly HttpClient Http;
 		private readonly JsonSerializerOptions SerializerOptions = new JsonSerializerOptions() { AllowTrailingCommas = true, PropertyNameCaseInsensitive = true };
@@ -36,7 +30,7 @@ namespace Overlapp.Client.Service
 			string url = $"/3/search/tv?query={title}&page={page}";
 			return await Get<SearchTvResponse>(url);
 		}
-		
+
 
 		public async Task<TvAggregateCreditResponse> GetTvCredits(int series_id)
 		{
@@ -44,7 +38,7 @@ namespace Overlapp.Client.Service
 			string url = $"/3/tv/{series_id}/aggregate_credits";
 			return await Get<TvAggregateCreditResponse>(url);
 		}
-		
+
 
 		public async Task<MovieCreditsResponse> GetMovieCredits(int movie_id)
 		{
@@ -52,7 +46,7 @@ namespace Overlapp.Client.Service
 			string url = $"/3/movie/{movie_id}/credits";
 			return await Get<MovieCreditsResponse>(url);
 		}
-		
+
 
 		public async Task<PersonCombinedCreditsResponse> GetPersonCredits(int person_id)
 		{
@@ -74,7 +68,7 @@ namespace Overlapp.Client.Service
 			string url = "/3/configuration";
 			return await Get<ImageConfiguration>(url);
 		}
-		
+
 
 		private async Task<T> Get<T>(string url)
 		{
