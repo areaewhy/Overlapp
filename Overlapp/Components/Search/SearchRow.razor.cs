@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Overlapp.Client.Service;
 using Overlapp.Shared.Model;
 
 namespace Overlapp.Components
@@ -8,6 +9,21 @@ namespace Overlapp.Components
 		[Parameter]
 		public IMediaRecord? Media { get; set; } = null;
 
-		public string WORD { get; } = "HI";
+		[CascadingParameter]
+		public ImageConfiguration ImageConfiguration { get; set; }
+
+		[Inject]
+		public ImageConfigurationService? ImageService { get; set; }
+
+		public string ImagePath(string not_found)
+		{
+			if (ImageConfiguration != null && Media != null)
+			{
+				return ImageConfiguration.MakeImage(Media);
+			}
+
+			return not_found;
+		}
+
 	}
 }
