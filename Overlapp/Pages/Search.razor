@@ -2,5 +2,5 @@
 @page "/search/{searchTerm}"
 
 <CascadingValue Value="ImageConfiguration">
-	<SearchList GetDataAsync="FetchDataAsync" SearchTerm="@searchTerm"></SearchList>
+	<SearchList GetDataAsync="FetchDataAsync" SearchTerm="@searchTerm" SelectClicked="ItemSelected"></SearchList>
 </CascadingValue>

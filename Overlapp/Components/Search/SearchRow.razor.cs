@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Overlapp.Client.Service;
+using Overlapp.Service;
 using Overlapp.Shared.Model;
 
 namespace Overlapp.Components
@@ -15,6 +16,12 @@ namespace Overlapp.Components
 		[Inject]
 		public ImageConfigurationService? ImageService { get; set; }
 
+		[Inject]
+		public AppStateService State { get; set; }
+
+		[Parameter]
+		public EventCallback<IMediaRecord> SelectedClick { get; set; }
+
 		public string ImagePath(string not_found)
 		{
 			if (ImageConfiguration != null && Media != null)
@@ -24,6 +31,8 @@ namespace Overlapp.Components
 
 			return not_found;
 		}
+
+		public bool AlreadyAdded => State.Request.HasItem(Media);
 
 	}
 }

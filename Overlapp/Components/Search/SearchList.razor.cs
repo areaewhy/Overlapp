@@ -17,8 +17,8 @@ namespace Overlapp.Components
 		[Parameter]
 		public Func<string, int, Task<SearchMultiResponse>> GetDataAsync { get; set; } = async (search, page) => { await Task.CompletedTask; return new SearchMultiResponse(0, new SearchMultiRecord[0], 0, 0); };
 
+		[Parameter]
 		public EventCallback<IMediaRecord> SelectClicked { get; set; }
-		public EventCallback<IMediaRecord> RemoveClicked { get; set; }
 
 		private bool IsBusy = true;
 
