@@ -1,5 +1,4 @@
-﻿using Overlapp.Client.Interface;
-using Overlapp.Shared.Model;
+﻿using Overlapp.Shared.Model;
 using System.Net.Http.Json;
 using System.Text.Json;
 

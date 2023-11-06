@@ -4,7 +4,7 @@
 	{
 		private int Setter = -1;
 
-		public IMediaRecord[] Items = new IMediaRecord[2]; // Capping at 2 items to intersect... 
+		public IMediaRecord?[] Items = new IMediaRecord[2]; // Capping at 2 items to intersect... 
 
 		public bool AddRequest(IMediaRecord r)
 		{
@@ -22,7 +22,7 @@
 		{
 			for (var i = 0; i < Items.Length; i++)
 			{
-				if (Items[i]?.Id == r.Id)
+				if (Items[i]?.id == r.id)
 				{
 					Items[i] = null;
 					Setter = i - 1;
@@ -38,7 +38,7 @@
 		public bool IsEmpty => Items.All(a => a == null);
 		public bool HasItem(IMediaRecord r)
 		{
-			return Items.Any(a => a != null && a.Id == r.Id);
+			return Items.Any(a => a != null && a.id == r.id);
 		}
 	}
 }

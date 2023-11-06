@@ -1,3 +1,21 @@
 ﻿@page "/"
+@inject NavigationManager Navigation
 
-Hello World!
+<div>
+	Hello World
+</div>
+
+<a href="/search">Search</a>
+
+@code {
+
+	protected override void OnInitialized()
+	{
+		// todo: this is for testing
+		GoToSearch();
+	}
+
+	private void GoToSearch(){
+		Navigation.NavigateTo("/search");
+	}
+}

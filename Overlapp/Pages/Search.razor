@@ -1,5 +1,4 @@
-﻿@page "/search/{Title}"
+﻿@page "/search"
+@page "/search/{searchTerm}"
 
-@Title
-
-
+<SearchList GetDataAsync="FetchDataAsync" SearchTerm="searchTerm"></SearchList>"

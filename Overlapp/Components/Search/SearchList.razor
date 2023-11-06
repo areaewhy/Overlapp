@@ -1,0 +1,30 @@
+﻿@namespace Overlapp.Components
+@using Microsoft.AspNetCore.Components.Forms
+
+@SearchTerm
+
+<div class="container-fluid">
+	<div class="row">
+		<EditForm Model="Data" OnValidSubmit="Search" class="input-group">
+			<InputText @bind-Value="SearchTerm" class="input-group-text"></InputText>
+			<button type="submit" class="btn btn-primary">?</button>
+		</EditForm>
+	</div>
+	@if (Data?.results != null)
+	{
+		<ul class="list-group">
+			@foreach (var row in Data.results)
+			{
+				var media = (IMediaRecord)row;
+				<li class="list-group-item">
+					@media.NameOrTitle
+					@media.ReleaseDate
+					@media.MediaType
+					<br />
+					@media
+				</li>
+			}
+		</ul>
+		
+	}
+</div>

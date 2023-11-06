@@ -21,11 +21,11 @@
 		float vote_average,
 		int vote_count) : IMediaRecord
 	{
-		public long Id => id;
-		public string Title => name;
+		public long id => id;
+		public string NameOrTitle => name;
 		public MediaType MediaType => MediaType.Tv;
 		public string Image => poster_path;
-		public string Overview => overview;
+		public string MediaOverview => overview;
 		public DateTime ReleaseDate => DateTime.Parse(first_air_date);
 	}
 }

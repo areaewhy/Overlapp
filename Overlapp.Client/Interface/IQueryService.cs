@@ -1,6 +1,6 @@
 ﻿using Overlapp.Shared.Model;
 
-namespace Overlapp.Client.Interface
+namespace Overlapp.Client
 {
 	public interface IQueryService
 	{
