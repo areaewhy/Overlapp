@@ -6,6 +6,9 @@ namespace Overlapp.Components
 	public partial class SearchList : ComponentBase
 	{
 
+		[Inject]
+		public NavigationManager Navigation { get; set; }
+
 		[Parameter]
 		public string SearchTerm { get; set; } = string.Empty;
 		[Parameter]
@@ -17,11 +20,26 @@ namespace Overlapp.Components
 		public EventCallback<IMediaRecord> SelectClicked { get; set; }
 		public EventCallback<IMediaRecord> RemoveClicked { get; set; }
 
+		private bool IsBusy = true;
+
 		private SearchMultiResponse Data { get; set; } = new SearchMultiResponse(0, new SearchMultiRecord[0], 0, 0);
 
-		private async Task Search()
+		protected async override Task OnParametersSetAsync()
 		{
+			if (string.IsNullOrEmpty(SearchTerm))
+			{
+				IsBusy = false;
+				return;
+			}
+
+			IsBusy = true;
 			Data = await GetDataAsync(SearchTerm, PageNumber);
+			IsBusy = false;
+		}
+
+		private void Route()
+		{
+			Navigation.NavigateTo($"/search/{SearchTerm}");
 		}
 	}
 }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Overlapp;
 using Overlapp.Client;
+using Overlapp.Service;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -19,5 +20,7 @@ builder.Services.AddTransient(h =>
 builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>().CreateClient("TMDBApi"));
 
 builder.Services.AddOverlappServices();
+
+builder.Services.AddScoped<AppStateService>();
 
 await builder.Build().RunAsync();
