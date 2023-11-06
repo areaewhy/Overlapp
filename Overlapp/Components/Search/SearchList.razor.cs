@@ -21,12 +21,13 @@ namespace Overlapp.Components
 		public EventCallback<IMediaRecord> SelectClicked { get; set; }
 
 		private bool IsBusy = true;
+		private string _searchTerm;
 
 		private SearchMultiResponse Data { get; set; } = new SearchMultiResponse(0, new SearchMultiRecord[0], 0, 0);
 
 		protected async override Task OnParametersSetAsync()
 		{
-			if (string.IsNullOrEmpty(SearchTerm))
+			if (string.IsNullOrEmpty(SearchTerm) || _searchTerm == SearchTerm)
 			{
 				IsBusy = false;
 				return;
@@ -34,6 +35,7 @@ namespace Overlapp.Components
 
 			IsBusy = true;
 			Data = await GetDataAsync(SearchTerm, PageNumber);
+			_searchTerm = SearchTerm;
 			IsBusy = false;
 		}
 

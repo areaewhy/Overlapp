@@ -17,8 +17,11 @@ namespace Overlapp.Pages
 		[Inject]
 		AppStateService? AppStateService { get; set; }
 
+		[Inject]
+		NavigationManager Navigate { get; set; }
+
 		[Parameter]
-		public string searchTerm { get; set; } = string.Empty;
+		public string SearchTerm { get; set; } = string.Empty;
 
 		public ImageConfiguration ImageConfiguration { get; set; }
 
@@ -36,6 +39,11 @@ namespace Overlapp.Pages
 			else
 			{
 				AppStateService.Request.AddRequest(record);
+			}
+
+			if (AppStateService.Request.IsReady)
+			{
+				Navigate.NavigateTo($"/overlapp?ida={AppStateService.Request.Items[0]!.id}&idb={AppStateService.Request.Items[1]!.id}");
 			}
 		}
 

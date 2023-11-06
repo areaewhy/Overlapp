@@ -42,6 +42,13 @@ namespace Overlapp.Pages
 		}
 
 
+		public async Task FetchData(int ida, int idb)
+		{
+
+			// do the intersection
+		}
+
+
 		public void Dispose()
 		{
 			Navigation.LocationChanged -= HandleLocationChanged;
