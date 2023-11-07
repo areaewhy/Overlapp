@@ -1,4 +1,7 @@
-﻿namespace Overlapp.Shared.Model
+﻿using Overlapp.Shared.Model.Domain;
+using System.Linq;
+
+namespace Overlapp.Shared.Model
 {
 	public enum MediaType { Unknown, Movie, Tv }
 

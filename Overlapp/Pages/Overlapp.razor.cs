@@ -8,50 +8,33 @@ namespace Overlapp.Pages
 		[Inject]
 		NavigationManager Navigation { get; set; }
 
+		[SupplyParameterFromQuery]
+		public string? ida { get; set; }
 
-		int? ida;
-		int? idb;
+		[SupplyParameterFromQuery]
+		public string? idb { get; set; }
 
 		protected override void OnInitialized()
 		{
-			GetQueryStringValues();
-			Navigation.LocationChanged += HandleLocationChanged;
+			
 		}
 
 		void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
 		{
-			GetQueryStringValues();
 			StateHasChanged();
 
 		}
 
-		void GetQueryStringValues()
-		{
-			// kinda yucky!
-			var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
-			var pieces = uri.Query.Replace("?","").Split('&');
-			var parsed = pieces.Select(t => t.Split("=")).Where(x => x.Count() == 2).ToDictionary(k => k[0].ToLower(), v => v[1]);
-			if (parsed.TryGetValue(nameof(ida), out var a) && int.TryParse(a, out var ai))
-			{
-				ida = ai;
-			}
-			if (parsed.TryGetValue(nameof(idb), out var b) && int.TryParse(a, out var bi))
-			{
-				idb = bi;
-			}
-		}
 
 
 		public async Task FetchData(int ida, int idb)
 		{
-
 			// do the intersection
 		}
 
 
 		public void Dispose()
 		{
-			Navigation.LocationChanged -= HandleLocationChanged;
 		}
 	}
 }
