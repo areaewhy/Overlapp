@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Overlapp.Client.Service;
 using Overlapp.Shared.Model;
 
 namespace Overlapp.Client

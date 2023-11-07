@@ -1,7 +1,7 @@
 ﻿using Overlapp.Client.Utility;
 using Overlapp.Shared.Model;
 
-namespace Overlapp.Client.Service
+namespace Overlapp.Client
 {
 	public class ImageConfigurationService
 	{

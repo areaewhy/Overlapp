@@ -2,16 +2,14 @@
 
 namespace Overlapp.Shared.Model
 {
-	public record TvAggregateCreditResponse(TvAggregateCreditRecordCast[] cast, TvAggregateCreditRecordCrew[] crew, long id);
-	public record TvAggregateCreditRecordCast(bool adult, int gender, long id, string known_for_department, string name, string original_name, float popularity, string profile_path, CastRole[] roles, int total_episode_count, int order) : IPerson
+	public record TvAggregateCreditResponse(TvAggregateCreditRecordCast[] cast, TvAggregateCreditRecordCrew[] crew, int id);
+	public record TvAggregateCreditRecordCast(bool adult, int gender, int id, string known_for_department, string name, string original_name, float popularity, string profile_path, CastRole[] roles, int total_episode_count, int order) : IPerson
 	{
-		public long Id => id;
 		public string Name => name;
 		public string Image => profile_path;
 	}
-	public record TvAggregateCreditRecordCrew(bool adult, int gender, long id, string known_for_department, string name, string original_name, float popularity, string profile_path, CrewJob[] jobs, string department, int total_episode_count) : IPerson
+	public record TvAggregateCreditRecordCrew(bool adult, int gender, int id, string known_for_department, string name, string original_name, float popularity, string profile_path, CrewJob[] jobs, string department, int total_episode_count) : IPerson
 	{
-		public long Id => id;
 		public string Name => name;
 		public string Image => profile_path;
 	}
@@ -21,7 +19,7 @@ namespace Overlapp.Shared.Model
 
 	public interface IPerson
 	{
-		long Id { get; }
+		int id { get; }
 		string Name { get; }
 		string Image { get; }
 

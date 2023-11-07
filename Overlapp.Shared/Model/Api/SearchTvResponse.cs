@@ -9,7 +9,7 @@
 		int adult,
 		string backdrop_path,
 		int[] genre_ids,
-		long id,
+		int id,
 		string[] origin_country,
 		string original_language,
 		string original_name,
@@ -21,7 +21,7 @@
 		float vote_average,
 		int vote_count) : IMediaRecord
 	{
-		public long id => id;
+		public int id => id;
 		public string NameOrTitle => name;
 		public MediaType MediaType => MediaType.Tv;
 		public string Image => poster_path;

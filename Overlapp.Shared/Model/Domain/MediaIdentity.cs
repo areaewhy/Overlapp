@@ -8,13 +8,13 @@
 			Id = record.id;
 		}
 		public MediaType MediaType { get; init; } = MediaType.Unknown;
-		public long Id { get; init; }
+		public int Id { get; init; }
 
 		public bool IsValid => Id != 0;
 
 		public override string ToString() => ToIdentifier(MediaType, Id);
 
-		public static string ToIdentifier(MediaType t, long id) => $"{t.ToString()[0]}{id}";
+		public static string ToIdentifier(MediaType t, int id) => $"{t.ToString()[0]}{id}";
 
 		public static string ToIdentifier(IMediaRecord r) => ToIdentifier(r.MediaType, r.id);
 
@@ -23,6 +23,7 @@
 			return new MediaIdentity(record);
 		}
 
+		// todo: add tests
 		public static MediaIdentity Create(string id)
 		{
 			if (string.IsNullOrWhiteSpace(id) || id.Length < 2)
@@ -36,7 +37,7 @@
 
 			MediaType t = Enum.GetValues<MediaType>().Where(e => e.ToString()[0] == media_short).FirstOrDefault();
 
-			if (long.TryParse(id.Substring(1), out long num))
+			if (int.TryParse(id.Substring(1), out int num))
 			{
 				return new MediaIdentity()
 				{

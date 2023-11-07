@@ -2,7 +2,7 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 
-namespace Overlapp.Client.Service
+namespace Overlapp.Client
 {
 	public class QueryService : IQueryService
 	{
@@ -60,6 +60,20 @@ namespace Overlapp.Client.Service
 			// # https://developer.themoviedb.org/reference/search-multi
 			string url = $"/3/search/multi?query={search}&page={page}"; ;
 			return await Get<SearchMultiResponse>(url);
+		}
+
+		public async Task<MovieDetailsResponse> MovieDetail(int movie_id)
+		{
+			// # https://developer.themoviedb.org/reference/movie-details
+			string url = $"/3/movie/{movie_id}";
+			return await Get<MovieDetailsResponse>(url);
+		}
+
+		public async Task<TvDetailsResponse> TvDetail(int series_id)
+		{
+			// # https://developer.themoviedb.org/reference/tv-series-details
+			string url = $"/3/tv/{series_id}";
+			return await Get<TvDetailsResponse>(url);
 		}
 
 		public async Task<ImageConfiguration> GetImageConfiguration()

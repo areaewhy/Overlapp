@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Components;
-using Overlapp.Client.Service;
+using Overlapp.Client;
 using Overlapp.Service;
 using Overlapp.Shared.Model;
 
