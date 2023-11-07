@@ -4,6 +4,11 @@
 	{
 		private int Setter = -1;
 
+		public OverlapRequest(IMediaRecord a, IMediaRecord b)
+		{
+			Items = new IMediaRecord[] { a, b };
+		}
+
 		public IMediaRecord?[] Items = new IMediaRecord[2]; // Capping at 2 items to intersect... 
 
 		public bool AddRequest(IMediaRecord r)

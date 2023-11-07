@@ -30,8 +30,7 @@ namespace Overlapp.Client
 			return await Get<SearchTvResponse>(url);
 		}
 
-
-		public async Task<TvAggregateCreditResponse> GetTvCredits(int series_id)
+		public async Task<TvAggregateCreditResponse> TvCredits(int series_id)
 		{
 			// # https://developer.themoviedb.org/reference/tv-series-aggregate-credits
 			string url = $"/3/tv/{series_id}/aggregate_credits";
@@ -39,7 +38,7 @@ namespace Overlapp.Client
 		}
 
 
-		public async Task<MovieCreditsResponse> GetMovieCredits(int movie_id)
+		public async Task<MovieCreditsResponse> MovieCredits(int movie_id)
 		{
 			// # https://developer.themoviedb.org/reference/movie-credits
 			string url = $"/3/movie/{movie_id}/credits";

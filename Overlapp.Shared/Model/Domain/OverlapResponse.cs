@@ -1,4 +1,4 @@
 ﻿namespace Overlapp.Shared.Model
 {
-	public record OverlapResponse(IMediaRecord[] Items, CreditAggregate[] Intersection);
+	public record OverlapResponse(IMediaRecord?[] Items, CreditAggregate[] Intersection);
 }
