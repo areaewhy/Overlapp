@@ -1,0 +1,42 @@
+﻿@namespace Overlapp.Components
+<div class="row">
+	<div class="col-3 justify-content-center">
+		<div>
+		<img style="height:100%; max-width:100%;" src="@(ImageConfiguration.MakeImage(Credit.Representative) ?? "/no-photo-available.jpg")" onerror="" />
+		</div>
+	</div>
+	<div class="col-9 mb-2">
+		<h4>@Credit.Representative.PersonName</h4>
+		@foreach (var department in Credit.Departments)
+		{
+			<div>
+				<b>@department.Representative.Department</b>
+			</div>
+
+			<ul class="list-group list-unstyled">
+				@foreach (var film in department.Films)
+				{
+					<li class="">
+						<div>
+							<u>@film.Representative.Item!.NameOrTitle</u>
+						</div>
+
+						<div>
+							<ul class="list-group">
+								@foreach (var character in film.Characters)
+								{
+
+									<li class="ms-4">
+										@($"{character.CharacterOrJob}{(character.InstanceCount > 0 ? $" [ {character.InstanceCount} episodes ]" : "")}")
+									</li>
+								}
+							</ul>
+						</div>
+					</li>
+				}
+			</ul>
+
+		}
+	</div>
+
+</div>

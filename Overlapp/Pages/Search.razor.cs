@@ -42,7 +42,8 @@ namespace Overlapp.Pages
 
 			if (AppStateService.Request.IsReady)
 			{
-				Navigate.NavigateTo($"/overlapp?ida={AppStateService.Request.Items[0]!.id}&idb={AppStateService.Request.Items[1]!.id}");
+				var ids = AppStateService.Request.Items.Select(m => MediaIdentity.ToIdentifier(m)).ToArray();
+				Navigate.NavigateTo($"/overlap?ida={ids[0]}&idb={ids[1]}");
 			}
 		}
 

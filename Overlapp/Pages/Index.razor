@@ -2,7 +2,7 @@
 @inject NavigationManager Navigation
 
 <div>
-	Hello World
+	Hello World.... todo: make a homescreen!
 </div>
 
 <a href="/search">Search</a>
@@ -11,7 +11,9 @@
 
 	protected override void OnInitialized()
 	{
-		// todo: this is for testing
+#if DEBUG
+	Navigation.NavigateTo("/overlap?ida=T1855&idb=T580");
+#endif
 		GoToSearch();
 	}
 

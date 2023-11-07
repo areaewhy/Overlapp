@@ -5,10 +5,10 @@
 		public static CreditAggregate[] ToAggregateCredits(this TvAggregateCreditResponse credits, IMediaRecord media)
 		{
 			var crew = credits.crew.SelectMany(c => c.jobs.Select(j => new CreditAggregate(
-				Name: c.Name,
+				Name: c.PersonName,
 				CharacterOrJob: j.job,
 				Department: "crew",
-				Id: c.id,
+				id: c.id,
 				CreditId: j.credit_id,
 				InstanceCount: c.total_episode_count,
 				Popularity: c.popularity,
@@ -16,10 +16,10 @@
 				Item: media))).ToArray();
 
 			var cast = credits.cast.SelectMany(c => c.roles.Select(r => new CreditAggregate(
-				Name: c.Name,
+				Name: c.PersonName,
 				CharacterOrJob: r.character,
 				Department: "actor",
-				Id: c.id,
+				id: c.id,
 				CreditId: r.credit_id,
 				InstanceCount: c.total_episode_count,
 				Popularity: c.popularity,
@@ -32,10 +32,10 @@
 		public static CreditAggregate[] ToAggregateCredits(this MovieCreditsResponse credits, IMediaRecord media)
 		{
 			var crew = credits.crew.Select(c => new CreditAggregate(
-				Name: c.Name,
+				Name: c.PersonName,
 				CharacterOrJob: c.job,
 				Department: c.department,
-				Id: c.id,
+				id: c.id,
 				CreditId: c.credit_id,
 				InstanceCount: 1,
 				Popularity: c.popularity,
@@ -43,10 +43,10 @@
 				Item: media)).ToArray();
 
 			var cast = credits.cast.Select(c => new CreditAggregate(
-				Name: c.Name,
+				Name: c.PersonName,
 				CharacterOrJob: c.character,
 				Department: "actor",
-				Id: c.id,
+				id: c.id,
 				CreditId: c.credit_id,
 				InstanceCount: 1,
 				Popularity: c.popularity,
@@ -58,7 +58,7 @@
 
 		public static CreditAggregate[] FindIntersection(this IEnumerable<CreditAggregate[]> credits)
 		{
-			var collections = credits.Select(a => a.GroupBy(k => k.Id).Select(a => a.Key).ToHashSet()).ToArray();
+			var collections = credits.Select(a => a.GroupBy(k => k.id).Select(a => a.Key).ToHashSet()).ToArray();
 
 			int j = 0;
 			while (j < collections.Length - 1)
@@ -66,11 +66,13 @@
 				collections[0] = collections[0].Intersect(collections[++j]).ToHashSet();
 			}
 
-			var consolidatedCredits = credits.SelectMany(t => t.Where(m => collections[0].Contains(m.Id)));
+			var consolidatedCredits = credits.SelectMany(t => t.Where(m => collections[0].Contains(m.id)));
 			var intersection = consolidatedCredits.OrderBy(a => a.Department).ThenByDescending(t => t.InstanceCount).ToArray();
 
 			return intersection;
 		}
+
+
 
 		/// <summary>
 		/// Concatenate two arrays
@@ -87,5 +89,8 @@
 
 			return x;
 		}
+
+		
+
 	}
 }

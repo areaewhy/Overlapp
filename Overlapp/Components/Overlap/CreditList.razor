@@ -1,0 +1,17 @@
+﻿@namespace Overlapp.Components
+
+@if(IsBusy){
+	@:Loading...
+}
+else if (Data != null){
+	<ul class="list-group">
+		@foreach(var row in Data.GroupBy(t => t.id)){
+			<li class="m-3 list-group-item">
+				@{
+					var creditGroup = new CreditAggregateGroup(row);
+				}
+				<CreditRow Credit="creditGroup"></CreditRow>
+			</li>
+		}
+	</ul>
+}

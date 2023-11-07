@@ -52,7 +52,8 @@ namespace Overlapp.Client
 					return await QueryService.MovieDetail(media.Id);
 			}
 
-			throw new Exception("Invalid Detail Request");
+			return null;
+			//throw new Exception("Invalid Detail Request");
 		}
 	}
 }

@@ -4,6 +4,7 @@
 	{
 		private int Setter = -1;
 
+		public OverlapRequest() { }
 		public OverlapRequest(IMediaRecord a, IMediaRecord b)
 		{
 			Items = new IMediaRecord[] { a, b };

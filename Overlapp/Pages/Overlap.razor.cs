@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Overlapp.Client;
+using Overlapp.Service;
 using Overlapp.Shared.Model;
 using Overlapp.Shared.Model.Domain;
 
@@ -12,57 +13,52 @@ namespace Overlapp.Pages
 		NavigationManager Navigation { get; set; }
 
 		[Inject]
-		QueryService QueryService { get; set; }
+		ComparisonService ComparisonService { get; set; }
 
+		[Inject]
+		public AppStateService AppState { get; set; }
+
+		[Inject]
+		public ImageConfigurationService ImageConfigurationService { get; set; }
+
+		[Parameter]
 		[SupplyParameterFromQuery]
 		public string? ida { get; set; }
 
+		[Parameter]
 		[SupplyParameterFromQuery]
 		public string? idb { get; set; }
 
-		public IMediaRecord MediaA { get; set; }
-		public IMediaRecord MediaB { get; set; }
+		private ImageConfiguration ImageConfiguration;
+
+		protected async override Task OnInitializedAsync()
+		{
+			ImageConfiguration = await ImageConfigurationService.Configuration;
+		}
 
 		protected async override Task OnParametersSetAsync()
 		{
-			var recordA = MediaIdentity.Create(ida);
-			var recordB = MediaIdentity.Create(idb);
-
-			var (mediaA, crewA) = await GetDetails(recordA);
-			var (mediaB, crewB) = await GetDetails(recordB);
-		}
-
-		private async Task<CreditAggregate[]> Overlap(IMediaRecord a, IMediaRecord b)
-		{
-			return null;
-		}
-
-		private async Task<(IMediaRecord, CreditAggregate[])> GetDetails(MediaIdentity id)
-		{
-			if (!id.IsValid)
+			if (AppState.Request.IsEmpty && !string.IsNullOrEmpty(ida) && !string.IsNullOrEmpty(idb))
 			{
-				await Task.CompletedTask;
-				// invalid id...  todo: better handling
-				throw new Exception("Invalid Parameter");
+				var a = MediaIdentity.Create(ida);
+				var b = MediaIdentity.Create(idb);
+
+				var request = await ComparisonService.RequestBuild(a, b);
+
+				AppState.OverrideRequest(request);
+			}
+		}
+
+		private async Task<CreditAggregate[]> GetCreditOverlap()
+		{
+			if (AppState.Request.IsReady)
+			{
+				var results = await ComparisonService.ResponseBuild(AppState.Request);
+				return results.Intersection;
 			}
 
-			switch (id.MediaType)
-			{
-				case MediaType.Tv:
-					var tvDetail = await QueryService.TvDetail(id.Id);
-					var tvCast = await QueryService.TvCredits(id.Id);
-					return (tvDetail, tvCast.ToAggregateCredits(tvDetail));
-				case MediaType.Movie:
-					var movieDetail = await QueryService.MovieDetail(id.Id);
-					var movieCast = await QueryService.MovieCredits(id.Id);
-					return (movieDetail, movieCast.ToAggregateCredits(movieDetail));
-			}
-
-			throw new Exception("Invalid Parameter");
-
+			return new CreditAggregate[0];
 		}
-
-
 
 	}
 }
