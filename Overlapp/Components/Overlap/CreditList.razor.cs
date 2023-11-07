@@ -8,7 +8,7 @@ namespace Overlapp.Components
 		[Parameter]
 		public Func<Task<CreditAggregate[]>> FetchCredits { get; set; }
 
-		CreditAggregate[] Data { get; set; }
+		CreditAggregate?[] Data { get; set; }
 		bool IsBusy { get; set; }
 
 		protected async override Task OnParametersSetAsync()

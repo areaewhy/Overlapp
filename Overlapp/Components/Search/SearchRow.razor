@@ -1,15 +1,17 @@
 ﻿@namespace Overlapp.Components
 
 <div class="row">
-	<div class="col">
-		<img src="@ImagePath("/no-image-available.svg")" />
+	<div class="col-3">
+		<div>
+			<img style="max-width:100%; max-height:100%;" src="@ImagePath("/no-image-available.svg")" />
+		</div>
 	</div>
-	<div class="col">
-		<div class="fw-bold fs-3">@Media.NameOrTitle</div>
-		<div class="fs-2">@Media.MediaType</div>
-		<div class="fs-2">@Media.ReleaseDate.Year</div>
+	<div class="col-6 d-flex flex-column">
+		<h5 class="fw-bold">@Media.NameOrTitle</h5>
+		<div class="mt-auto">@Media.MediaType</div>
+		<div class="mb-4">@Media.ReleaseDate.Year</div>
 	</div>
-	<div class="col">
+	<div class="col-3 d-flex align-items-center">
 		<button class="btn @(AlreadyAdded ? "btn-primary" : "btn-outline-primary")" @onclick="async () => await SelectedClick.InvokeAsync(Media)">@(AlreadyAdded ? "Remove" : "Add")</button>
 	</div>
 </div>

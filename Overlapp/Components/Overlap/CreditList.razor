@@ -1,9 +1,9 @@
 ﻿@namespace Overlapp.Components
 
-@if(IsBusy){
+@if (IsBusy) {
 	@:Loading...
 }
-else if (Data != null){
+else if (Data != null && Data.Any()){
 	<ul class="list-group">
 		@foreach(var row in Data.GroupBy(t => t.id)){
 			<li class="m-3 list-group-item">
@@ -14,4 +14,8 @@ else if (Data != null){
 			</li>
 		}
 	</ul>
+}
+else
+{
+	@: No overlapp!
 }
