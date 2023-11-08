@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Components.Forms
 
 <div class="container-fluid">
-	<div class="row">
+	<div class="row mb-3">
 		<EditForm Model="Data" OnValidSubmit="Route" class="input-group">
 			<InputText @bind-Value="SearchTerm" class="input-group-text flex-grow-1" placeholder="Search for Tv or a Movie"></InputText>
 			<button disabled="@IsBusy" type="submit" class="btn btn-primary">?</button>

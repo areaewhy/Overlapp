@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Overlapp.Model;
 using Overlapp.Shared.Model;
 
 namespace Overlapp.Components
@@ -15,7 +16,7 @@ namespace Overlapp.Components
 		public int PageNumber { get; set; } = 1;
 
 		[Parameter]
-		public Func<string, int, Task<IApiPagedResponse<IMediaRecord>>> GetDataAsync { get; set; } = null!;
+		public Func<string, int, Task<IApiPagedResponse<SearchMultiRecord>>> GetDataAsync { get; set; } = null!;
 
 		[Parameter]
 		public EventCallback<IMediaRecord> SelectClicked { get; set; }
@@ -23,7 +24,7 @@ namespace Overlapp.Components
 		private bool IsBusy = true;
 		private string? _searchTerm;
 
-		private IApiPagedResponse<IMediaRecord>? Data { get; set; } = null;
+		private IApiPagedResponse<SearchMultiRecord>? Data { get; set; } = new EmptyPagedResponse();
 
 		protected async override Task OnParametersSetAsync()
 		{

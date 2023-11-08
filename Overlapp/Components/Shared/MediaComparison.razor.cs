@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Overlapp.Model;
 using Overlapp.Shared.Model;
 
 namespace Overlapp.Components
@@ -6,10 +7,10 @@ namespace Overlapp.Components
 	public partial class MediaComparison
 	{
 		[Parameter]
-		public IMediaRecord[] Data { get; set; }
+		public IMediaRecord[] Data { get; set; } = new EmptyMediaRecord[2];
 
 		[CascadingParameter]
-		public ImageConfiguration ImageConfiguration { get; set; }
+		public ImageConfiguration ImageConfiguration { get; set; } = null!;
 
 		[Parameter]
 		public EventCallback<IMediaRecord> ItemRemoveClick { get; set; }

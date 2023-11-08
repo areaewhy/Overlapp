@@ -1,25 +1,31 @@
 ﻿@namespace Overlapp.Components
 <div class="container mb-3">
-	<div class="row d-flex justify-content-around m-3" style="height:200px;">
+	<div class="row d-flex justify-content-around m-3" style="">
 		@foreach (var item in Data)
 		{
-
-			<div style="height:100%; width:200px;" class="d-flex flex-column justify-content-center border text-center p-2 position-relative">
-				<div style="height:80%;">
-					@{
-						string src = item == null ? "no-image-available.svg" : ImageConfiguration.MakeImage(item) ?? "no-image-available.svg";
-						<img class="" style="height:100%" src="@src" />
-					}
-				</div>
-				<div style="height:20%">
-					<small>@item?.NameOrTitle</small>
-				</div>
-				@if (item != null)
+			<div style="height:100%; width:150px; height:150px;" class="d-flex flex-column justify-content-center text-center p-2 position-relative">
+				@if(item != null)
 				{
+					<div style="height:80%;">
+						@{
+							string src = item == null ? "no-image-available.svg" : ImageConfiguration.MakeImage(item) ?? "no-image-available.svg";
+							<img class="img-fluid" style="height:100%" src="@src" />
+						}
+					</div>
+					<p style="height:20%; margin:0;" class="text-truncate">
+						<small>@(item?.NameOrTitle)</small>
+					</p>
 					<button style="position:absolute; top:-5px; left:-15px; width:30px; height:30px;" class="rounded-circle bg-danger text-white border-0" @onclick="() => ItemRemoveClick.InvokeAsync(item)">X</button>
+				}
+				else
+				{
+					<div class="d-flex justify-content-center align-items-center" style="background:#efefef; height:100%;">
+						<p class="fw-bold fs-1" style="color:#777">+</p>
+					</div>
 				}
 			</div>
 		}
+		
 	</div>
 </div>
 

@@ -24,7 +24,7 @@ namespace Overlapp.Pages
 
 		public ImageConfiguration ImageConfiguration { get; set; } = null!;
 
-		private async Task<IApiPagedResponse<IMediaRecord>> FetchDataAsync(string searchTerm, int page = 1)
+		private async Task<IApiPagedResponse<SearchMultiRecord>> FetchDataAsync(string searchTerm, int page = 1)
 		{
 			return await QueryService!.SearchMulti(searchTerm, page);
 		}

@@ -1,20 +1,27 @@
 ﻿@page "/"
 @inject NavigationManager Navigation
 
-<div>
-	Hello World.... todo: make a homescreen!
+<div class="container flex-column d-flex text-center vh-100">
+	<div class="row mt-auto mb-4">
+		<h5>
+			<i>Welcome to... </i>
+		</h5>
+	</div>
+
+	<div class="row">
+		<h1>Overlapp!</h1>
+	</div>
+	<div class="row mt-auto">
+		<span class="">
+			Finally answer the question: Isn't that the actor from XYZ??
+		</span>
+	</div>
+	
+	<div class="row mt-auto">
+		<a href="/search" class="btn btn-primary">Search</a>
+	</div>
+
 </div>
 
-<a href="/search">Search</a>
 
-@code {
 
-	protected override void OnInitialized()
-	{
-		GoToSearch();
-	}
-
-	private void GoToSearch(){
-		Navigation.NavigateTo("/search");
-	}
-}

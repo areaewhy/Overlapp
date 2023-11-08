@@ -1,3 +1,8 @@
+:root {
+    --orange: #ffa500;
+    --blue: #007eff;
+}
+
 h1:focus {
     outline: none;
 }

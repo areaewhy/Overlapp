@@ -1,6 +1,6 @@
 ﻿namespace Overlapp.Shared.Model
 {
-	public interface IApiPagedResponse<T>
+	public interface IApiPagedResponse<T> where T : IMediaRecord
 	{
 		int page { get; init; }
 		int total_pages { get; init; }
