@@ -21,7 +21,6 @@ namespace Overlapp.Shared.Model
 	{
 		int id { get; }
 		string PersonName { get; }
-		string Image { get; }
-
+		string? Image { get; }
 	}
 }

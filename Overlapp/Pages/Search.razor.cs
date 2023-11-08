@@ -8,21 +8,21 @@ namespace Overlapp.Pages
 	public partial class Search : ComponentBase
 	{
 		[Inject]
-		IQueryService? QueryService { get; set; }
+		IQueryService QueryService { get; set; } = null!;
 
 		[Inject]
-		ImageConfigurationService? ImageService { get; set; }
+		ImageConfigurationService ImageService { get; set; } = null!;
 
 		[Inject]
-		AppStateService? AppState { get; set; }
+		AppStateService AppState { get; set; } = null!;
 
 		[Inject]
-		NavigationManager Navigate { get; set; }
+		NavigationManager Navigate { get; set; } = null!;
 
 		[Parameter]
 		public string SearchTerm { get; set; } = string.Empty;
 
-		public ImageConfiguration ImageConfiguration { get; set; }
+		public ImageConfiguration ImageConfiguration { get; set; } = null!;
 
 		private async Task<IApiPagedResponse<IMediaRecord>> FetchDataAsync(string searchTerm, int page = 1)
 		{
@@ -49,10 +49,10 @@ namespace Overlapp.Pages
 
 		protected async override Task OnInitializedAsync()
 		{
-			ImageConfiguration = await ImageService?.Configuration;
+			ImageConfiguration = await ImageService.Configuration;
 		}
 
-		private async Task ItemRemove(IMediaRecord record)
+		private void ItemRemove(IMediaRecord record)
 		{
 			AppState.Request.RemoveRequest(record);
 		}

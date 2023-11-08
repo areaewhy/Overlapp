@@ -7,7 +7,7 @@ namespace Overlapp.Components
 	{
 
 		[Inject]
-		public NavigationManager Navigation { get; set; }
+		public NavigationManager Navigation { get; set; } = null!;
 
 		[Parameter]
 		public string SearchTerm { get; set; } = string.Empty;
@@ -21,7 +21,7 @@ namespace Overlapp.Components
 		public EventCallback<IMediaRecord> SelectClicked { get; set; }
 
 		private bool IsBusy = true;
-		private string _searchTerm;
+		private string? _searchTerm;
 
 		private IApiPagedResponse<IMediaRecord>? Data { get; set; } = null;
 

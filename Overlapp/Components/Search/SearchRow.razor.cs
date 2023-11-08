@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Overlapp.Client;
+using Overlapp.Model;
 using Overlapp.Service;
 using Overlapp.Shared.Model;
 
@@ -8,7 +9,7 @@ namespace Overlapp.Components
 	public partial class SearchRow : ComponentBase
 	{
 		[Parameter]
-		public IMediaRecord? Media { get; set; } = null;
+		public IMediaRecord Media { get; set; } = new EmptyMediaRecord();
 
 		[CascadingParameter]
 		public ImageConfiguration ImageConfiguration { get; set; }

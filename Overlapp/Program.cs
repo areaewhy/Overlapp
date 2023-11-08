@@ -17,7 +17,7 @@ builder.Services.AddTransient(h =>
 	new TMDBAuthHandler(builder.Configuration.GetValue<string>("TMDB_KEY"))
 );
 
-builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>().CreateClient("TMDBApi"));
+builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>()!.CreateClient("TMDBApi"));
 
 builder.Services.AddOverlappServices();
 
