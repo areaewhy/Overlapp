@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Routing;
 using Overlapp.Client;
 using Overlapp.Service;
 using Overlapp.Shared.Model;
-using Overlapp.Shared.Model.Domain;
 
 namespace Overlapp.Pages
 {
@@ -30,8 +28,7 @@ namespace Overlapp.Pages
 		public string? idb { get; set; }
 
 		private ImageConfiguration ImageConfiguration;
-		private OverlapResponse? Response { get; set; }
-
+	
 		protected async override Task OnInitializedAsync()
 		{
 			ImageConfiguration = await ImageConfigurationService.Configuration;
@@ -45,7 +42,7 @@ namespace Overlapp.Pages
 				var b = MediaIdentity.Create(idb);
 
 				var request = await ComparisonService.RequestBuild(a, b);
-
+				
 				AppState.OverrideRequest(request);
 			}
 		}
