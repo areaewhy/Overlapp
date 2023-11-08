@@ -12,7 +12,7 @@ namespace Overlapp.Shared.Model
 		public MediaType MediaType => MediaType.Movie;
 		public string Image => poster_path;
 		public string MediaOverview => overview;
-		public DateTime ReleaseDate => DateTime.Parse(release_date);
+		public DateTime? ReleaseDate => DateTime.TryParse(release_date, out var d) ? d : null;
 	}
 
 	public interface IMediaRecord
@@ -20,7 +20,7 @@ namespace Overlapp.Shared.Model
 		string NameOrTitle { get; }
 		MediaType MediaType { get; }
 		string Image { get; }
-		DateTime ReleaseDate { get; }
+		DateTime? ReleaseDate { get; }
 		string MediaOverview { get; }
 		int id { get; }
 	}

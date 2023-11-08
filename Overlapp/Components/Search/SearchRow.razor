@@ -9,7 +9,7 @@
 	<div class="col-6 d-flex flex-column">
 		<h5 class="fw-bold">@Media.NameOrTitle</h5>
 		<div class="mt-auto">@Media.MediaType</div>
-		<div class="mb-4">@Media.ReleaseDate.Year</div>
+		<div class="mb-4">@Media.ReleaseDate?.Year</div>
 	</div>
 	<div class="col-3 d-flex align-items-center">
 		<button class="btn @(AlreadyAdded ? "btn-primary" : "btn-outline-primary")" @onclick="async () => await SelectedClick.InvokeAsync(Media)">@(AlreadyAdded ? "Remove" : "Add")</button>

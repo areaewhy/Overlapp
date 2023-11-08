@@ -8,7 +8,7 @@
 
 		public string Image => poster_path;
 
-		public DateTime ReleaseDate => DateTime.Parse(first_air_date);
+		public DateTime? ReleaseDate => DateTime.TryParse(first_air_date, out var d) ? d : null;
 
 		public string MediaOverview => overview;
 	}

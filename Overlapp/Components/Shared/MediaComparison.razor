@@ -1,0 +1,35 @@
+﻿@namespace Overlapp.Components
+<div class="container">
+	<div class="row d-flex justify-content-around m-3" style="height:200px;">
+		@foreach (var item in Data)
+		{
+
+			<div style="height:100%; width:200px;" class="d-flex flex-column justify-content-center border text-center p-2 position-relative">
+				<div style="height:80%;">
+					@{
+						string src = item == null ? "no-image-available.svg" : ImageConfiguration.MakeImage(item) ?? "no-image-available.svg";
+						<img class="" style="height:100%" src="@src" />
+					}
+				</div>
+				<div style="height:20%">
+					<small>@item?.NameOrTitle</small>
+				</div>
+				@if (item != null)
+				{
+					<button style="position:absolute; top:-5px; left:-15px; width:30px; height:30px;" class="rounded-circle bg-danger text-white border-0" @onclick="() => ItemRemove.InvokeAsync(item)">X</button>
+				}
+			</div>
+		}
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public IMediaRecord[] Data { get; set; }
+
+	[CascadingParameter]
+	public ImageConfiguration ImageConfiguration { get; set; }
+
+	[Parameter]
+	public EventCallback<IMediaRecord> ItemRemove { get; set; }
+}

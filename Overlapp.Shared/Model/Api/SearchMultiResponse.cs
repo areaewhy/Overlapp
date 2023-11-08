@@ -8,6 +8,6 @@
 		public string Image => poster_path;
 		public string MediaOverview => overview;
 		public bool IsTv => MediaType == MediaType.Tv;
-		public DateTime ReleaseDate => DateTime.Parse(IsTv ? first_air_date : release_date);
+		public DateTime? ReleaseDate => DateTime.TryParse(IsTv ? first_air_date : release_date, out var d) ? d : null;
 	}
 }

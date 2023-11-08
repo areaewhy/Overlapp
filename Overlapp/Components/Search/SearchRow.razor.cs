@@ -26,7 +26,7 @@ namespace Overlapp.Components
 		{
 			if (ImageConfiguration != null && Media != null)
 			{
-				return ImageConfiguration.MakeImage(Media);
+				return ImageConfiguration.MakeImage(Media) ?? not_found;
 			}
 
 			return not_found;

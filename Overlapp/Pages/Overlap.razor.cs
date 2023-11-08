@@ -30,6 +30,7 @@ namespace Overlapp.Pages
 		public string? idb { get; set; }
 
 		private ImageConfiguration ImageConfiguration;
+		private OverlapResponse? Response { get; set; }
 
 		protected async override Task OnInitializedAsync()
 		{
@@ -60,5 +61,10 @@ namespace Overlapp.Pages
 			return new CreditAggregate[0];
 		}
 
+		private async Task ItemRemove(IMediaRecord record)
+		{
+			AppState.Request.RemoveRequest(record);
+			Navigation.NavigateTo("/search");
+		}
 	}
 }

@@ -14,7 +14,7 @@ namespace Overlapp.Pages
 		ImageConfigurationService? ImageService { get; set; }
 
 		[Inject]
-		AppStateService? AppStateService { get; set; }
+		AppStateService? AppState { get; set; }
 
 		[Inject]
 		NavigationManager Navigate { get; set; }
@@ -31,18 +31,18 @@ namespace Overlapp.Pages
 
 		private async Task ItemSelected(IMediaRecord record)
 		{
-			if (AppStateService.Request.HasItem(record))
+			if (AppState.Request.HasItem(record))
 			{
-				AppStateService.Request.RemoveRequest(record);
+				AppState.Request.RemoveRequest(record);
 			}
 			else
 			{
-				AppStateService.Request.AddRequest(record);
+				AppState.Request.AddRequest(record);
 			}
 
-			if (AppStateService.Request.IsReady)
+			if (AppState.Request.IsReady)
 			{
-				var ids = AppStateService.Request.Items.Select(m => MediaIdentity.ToIdentifier(m)).ToArray();
+				var ids = AppState.Request.Items.Select(m => MediaIdentity.ToIdentifier(m)).ToArray();
 				Navigate.NavigateTo($"/overlap?ida={ids[0]}&idb={ids[1]}");
 			}
 		}
@@ -50,6 +50,11 @@ namespace Overlapp.Pages
 		protected async override Task OnInitializedAsync()
 		{
 			ImageConfiguration = await ImageService?.Configuration;
+		}
+
+		private async Task ItemRemove(IMediaRecord record)
+		{
+			AppState.Request.RemoveRequest(record);
 		}
 	}
 }

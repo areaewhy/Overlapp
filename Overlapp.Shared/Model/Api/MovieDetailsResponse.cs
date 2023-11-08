@@ -1,6 +1,6 @@
 ﻿namespace Overlapp.Shared.Model
 {
-	public record MovieDetailsResponse(bool adult, string backdrop_path, int belongs_to_collection, decimal budget, Genre[] genres, string homepage, int id, string imdb_id, string original_language, string original_title, string overview, float popularity, string poster_path, ProductionCompany[] production_companies, ProductionCountry[] production_countries, string release_date, int revenu, int runtime, SpokenLanguage[] spoken_languages, string status, string title, bool video, float vote_average, int vote_count) : IMediaRecord
+	public record MovieDetailsResponse(bool adult, string backdrop_path, bool belongs_to_collection, decimal budget, Genre[] genres, string homepage, int id, string imdb_id, string original_language, string original_title, string overview, float popularity, string poster_path, ProductionCompany[] production_companies, ProductionCountry[] production_countries, string release_date, int revenu, int runtime, SpokenLanguage[] spoken_languages, string status, string title, bool video, float vote_average, int vote_count) : IMediaRecord
 	{
 		public string NameOrTitle => title;
 
@@ -8,7 +8,7 @@
 
 		public string Image => poster_path;
 
-		public DateTime ReleaseDate => DateTime.Parse(release_date);
+		public DateTime? ReleaseDate => DateTime.TryParse(release_date, out var d) ? d : null;
 
 		public string MediaOverview => overview;
 	}

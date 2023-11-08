@@ -4,9 +4,9 @@ namespace Overlapp.Shared.Model
 {
 	public static class ApiExtensions
 	{
-		public static string? MakeImage(this ImageConfiguration config, IPerson person)
+		public static string? MakeImage(this ImageConfiguration config, IPerson? person)
 		{
-			if (string.IsNullOrEmpty(person.Image))
+			if (string.IsNullOrEmpty(person?.Image))
 			{
 				return null;
 			}
@@ -14,10 +14,10 @@ namespace Overlapp.Shared.Model
 			return	$"{config.ImageRootUrl}{config.images.profile_sizes.Skip(1).FirstOrDefault()}{person.Image}";
 		}
 
-		public static string? MakeImage(this ImageConfiguration config, IMediaRecord record)
+		public static string? MakeImage(this ImageConfiguration config, IMediaRecord? record)
 		{
 
-			if (string.IsNullOrEmpty(record.Image))
+			if (string.IsNullOrEmpty(record?.Image))
 			{
 				return null;
 			}
