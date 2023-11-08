@@ -3,7 +3,7 @@
 	public record SearchTvResponse(int page,
 		SearchTvRecord[] results,
 		int total_pages,
-		int total_results);
+		int total_results) : IApiPagedResponse<SearchTvRecord>;
 
 	public record SearchTvRecord(
 		int adult,

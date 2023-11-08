@@ -14,20 +14,20 @@ namespace Overlapp.Client
 			Http = http;
 		}
 
-		public async Task<SearchMovieResponse> SearchMovieTitle(string title, int page = 1)
+		public async Task<IApiPagedResponse<IMediaRecord>> SearchMovieTitle(string title, int page = 1)
 		{
 			// # https://developer.themoviedb.org/reference/search-movie
 
 			string url = $"/3/search/movie?query={title}&page={page}";
-			return await Get<SearchMovieResponse>(url);
+			return (IApiPagedResponse<IMediaRecord>)await Get<SearchMovieResponse>(url);
 		}
 
 
-		public async Task<SearchTvResponse> SearchTvTitle(string title, int page = 1)
+		public async Task<IApiPagedResponse<IMediaRecord>> SearchTvTitle(string title, int page = 1)
 		{
 			// # https://developer.themoviedb.org/reference/search-tv
 			string url = $"/3/search/tv?query={title}&page={page}";
-			return await Get<SearchTvResponse>(url);
+			return (IApiPagedResponse<IMediaRecord>)await Get<SearchTvResponse>(url);
 		}
 
 		public async Task<TvAggregateCreditResponse> TvCredits(int series_id)
@@ -54,11 +54,11 @@ namespace Overlapp.Client
 		}
 
 
-		public async Task<SearchMultiResponse> SearchMulti(string search, int page = 1)
+		public async Task<IApiPagedResponse<IMediaRecord>> SearchMulti(string search, int page = 1)
 		{
 			// # https://developer.themoviedb.org/reference/search-multi
 			string url = $"/3/search/multi?query={search}&page={page}"; ;
-			return await Get<SearchMultiResponse>(url);
+			return (IApiPagedResponse<IMediaRecord>)await Get<SearchMultiResponse>(url);
 		}
 
 		public async Task<MovieDetailsResponse> MovieDetail(int movie_id)

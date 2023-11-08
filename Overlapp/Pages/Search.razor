@@ -2,6 +2,6 @@
 @page "/search/{searchTerm}"
 
 <CascadingValue Value="ImageConfiguration">
-	<MediaComparison Data="AppState.Request.Items" ItemRemove="ItemRemove"></MediaComparison>
+	<MediaComparison Data="AppState.Request.Items" ItemRemoveClick="ItemRemove"></MediaComparison>
 	<SearchList GetDataAsync="FetchDataAsync" SearchTerm="@SearchTerm" SelectClicked="ItemSelected"></SearchList>
 </CascadingValue>

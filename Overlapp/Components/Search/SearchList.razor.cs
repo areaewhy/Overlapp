@@ -15,7 +15,7 @@ namespace Overlapp.Components
 		public int PageNumber { get; set; } = 1;
 
 		[Parameter]
-		public Func<string, int, Task<SearchMultiResponse>> GetDataAsync { get; set; } = async (search, page) => { await Task.CompletedTask; return new SearchMultiResponse(0, new SearchMultiRecord[0], 0, 0); };
+		public Func<string, int, Task<IApiPagedResponse<IMediaRecord>>> GetDataAsync { get; set; } = null!;
 
 		[Parameter]
 		public EventCallback<IMediaRecord> SelectClicked { get; set; }
@@ -23,7 +23,7 @@ namespace Overlapp.Components
 		private bool IsBusy = true;
 		private string _searchTerm;
 
-		private SearchMultiResponse Data { get; set; } = new SearchMultiResponse(0, new SearchMultiRecord[0], 0, 0);
+		private IApiPagedResponse<IMediaRecord>? Data { get; set; } = null;
 
 		protected async override Task OnParametersSetAsync()
 		{

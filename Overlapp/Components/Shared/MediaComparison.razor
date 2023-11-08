@@ -1,5 +1,5 @@
 ﻿@namespace Overlapp.Components
-<div class="container">
+<div class="container mb-3">
 	<div class="row d-flex justify-content-around m-3" style="height:200px;">
 		@foreach (var item in Data)
 		{
@@ -16,20 +16,11 @@
 				</div>
 				@if (item != null)
 				{
-					<button style="position:absolute; top:-5px; left:-15px; width:30px; height:30px;" class="rounded-circle bg-danger text-white border-0" @onclick="() => ItemRemove.InvokeAsync(item)">X</button>
+					<button style="position:absolute; top:-5px; left:-15px; width:30px; height:30px;" class="rounded-circle bg-danger text-white border-0" @onclick="() => ItemRemoveClick.InvokeAsync(item)">X</button>
 				}
 			</div>
 		}
 	</div>
 </div>
 
-@code {
-	[Parameter]
-	public IMediaRecord[] Data { get; set; }
 
-	[CascadingParameter]
-	public ImageConfiguration ImageConfiguration { get; set; }
-
-	[Parameter]
-	public EventCallback<IMediaRecord> ItemRemove { get; set; }
-}

@@ -24,12 +24,12 @@ namespace Overlapp.Pages
 
 		public ImageConfiguration ImageConfiguration { get; set; }
 
-		private async Task<SearchMultiResponse> FetchDataAsync(string searchTerm, int page = 1)
+		private async Task<IApiPagedResponse<IMediaRecord>> FetchDataAsync(string searchTerm, int page = 1)
 		{
 			return await QueryService!.SearchMulti(searchTerm, page);
 		}
 
-		private async Task ItemSelected(IMediaRecord record)
+		private void ItemSelected(IMediaRecord record)
 		{
 			if (AppState.Request.HasItem(record))
 			{
