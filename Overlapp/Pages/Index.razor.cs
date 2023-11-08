@@ -8,9 +8,10 @@ namespace Overlapp.Pages
 			//GoToSearch();
 		}
 
+		private string SearchTerm { get; set; } = string.Empty;
 		private void GoToSearch()
 		{
-			Navigation.NavigateTo("/search");
+			Navigation.NavigateTo($"/search/{SearchTerm}");
 		}
 	}
 }
