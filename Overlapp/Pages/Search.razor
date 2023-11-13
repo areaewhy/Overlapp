@@ -2,6 +2,13 @@
 @page "/search/{searchTerm}"
 
 <CascadingValue Value="ImageConfiguration">
-	<MediaComparison Data="AppState.Request.Items" ItemRemoveClick="ItemRemove"></MediaComparison>
-	<SearchList GetDataAsync="FetchDataAsync" SearchTerm="@SearchTerm" SelectClicked="ItemSelected"></SearchList>
+	@if(FillingNumber.HasValue)
+	{
+		<button @onclick="@(()=> FillingNumber = null)">Cancel</button>
+		<SearchList GetDataAsync="FetchDataAsync" SearchTerm="@SearchTerm" SelectClicked="ItemSelected"></SearchList>
+	}
+	else 
+	{
+		<MediaComparison Data="AppState.Request.Items" ItemRemoveClick="ItemRemove" EmptySelected="EmptySelected"></MediaComparison>
+	}
 </CascadingValue>

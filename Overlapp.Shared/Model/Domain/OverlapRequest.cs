@@ -12,13 +12,21 @@
 
 		public IMediaRecord?[] Items = new IMediaRecord[2]; // Capping at 2 items to intersect... 
 
-		public bool AddRequest(IMediaRecord r)
+		public bool AddRequest(IMediaRecord r, int? index)
 		{
 			// No changes if this item is already present.
 			if (HasItem(r))
 				return false;
 
-			Setter = ++Setter % 2;
+			if (index != null)
+			{
+				Setter = index.Value % 2;
+			}
+			else
+			{
+				Setter = ++Setter % 2;
+			}
+			
 			Items[Setter] = r;
 
 			return true;

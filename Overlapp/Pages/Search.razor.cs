@@ -22,11 +22,18 @@ namespace Overlapp.Pages
 		[Parameter]
 		public string SearchTerm { get; set; } = string.Empty;
 
+		int? FillingNumber { get; set; }
+
 		public ImageConfiguration ImageConfiguration { get; set; } = null!;
 
 		private async Task<IApiPagedResponse<SearchMultiRecord>> FetchDataAsync(string searchTerm, int page = 1)
 		{
 			return await QueryService!.SearchMulti(searchTerm, page);
+		}
+
+		private async Task EmptySelected(int index)
+		{
+			FillingNumber = index;
 		}
 
 		private void ItemSelected(IMediaRecord record)
@@ -37,7 +44,7 @@ namespace Overlapp.Pages
 			}
 			else
 			{
-				AppState.Request.AddRequest(record);
+				AppState.Request.AddRequest(record, FillingNumber);
 			}
 
 			if (AppState.Request.IsReady)
@@ -45,11 +52,17 @@ namespace Overlapp.Pages
 				var ids = AppState.Request.Items.Select(m => MediaIdentity.ToIdentifier(m)).ToArray();
 				Navigate.NavigateTo($"/overlap?ida={ids[0]}&idb={ids[1]}");
 			}
+
+			FillingNumber = null;
 		}
 
 		protected async override Task OnInitializedAsync()
 		{
 			ImageConfiguration = await ImageService.Configuration;
+			if (AppState.Request.IsEmpty && !string.IsNullOrEmpty(SearchTerm))
+			{
+				FillingNumber = 0;
+			}
 		}
 
 		private void ItemRemove(IMediaRecord record)

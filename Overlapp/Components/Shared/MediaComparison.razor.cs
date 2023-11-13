@@ -14,5 +14,8 @@ namespace Overlapp.Components
 
 		[Parameter]
 		public EventCallback<IMediaRecord> ItemRemoveClick { get; set; }
+
+		[Parameter]
+		public EventCallback<int> EmptySelected { get; set; }
 	}
 }
