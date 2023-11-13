@@ -1,4 +1,5 @@
 ﻿using Overlapp.Shared.Model;
+using Overlapp.Shared.Model.Api;
 using System.Net.Http.Json;
 using System.Text.Json;
 
@@ -73,6 +74,18 @@ namespace Overlapp.Client
 			// # https://developer.themoviedb.org/reference/tv-series-details
 			string url = $"/3/tv/{series_id}";
 			return await Get<TvDetailsResponse>(url);
+		}
+
+		public async Task<SeasonDetailsResponse> TvSeasonDetail(int series_id, int season_number)
+		{
+			string url = $"/3/tv/{series_id}/season/{season_number}";
+			return await Get<SeasonDetailsResponse>(url);
+		}
+
+		public async Task<EpisodeCreditsResponse> TvEpisodeCredits(int series_id, int season_number, int episode_number)
+		{
+			string url = $"/3/tv/{series_id}/season/{season_number}/episode/{episode_number}/credits";
+			return await Get<EpisodeCreditsResponse>(url);
 		}
 
 		public async Task<ImageConfiguration> GetImageConfiguration()
