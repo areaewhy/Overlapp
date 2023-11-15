@@ -7,13 +7,13 @@ namespace Overlapp.Components
 	public partial class MediaComparison
 	{
 		[Parameter]
-		public IMediaRecord[] Data { get; set; } = new EmptyMediaRecord[2];
+		public MediaContainer[] Data { get; set; } = new MediaContainer[2];
 
 		[CascadingParameter]
 		public ImageConfiguration ImageConfiguration { get; set; } = null!;
 
 		[Parameter]
-		public EventCallback<IMediaRecord> ItemRemoveClick { get; set; }
+		public EventCallback<MediaContainer> ItemRemoveClick { get; set; }
 
 		[Parameter]
 		public EventCallback<int> EmptySelected { get; set; }

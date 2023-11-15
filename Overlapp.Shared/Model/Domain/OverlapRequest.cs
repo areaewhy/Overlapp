@@ -1,18 +1,29 @@
-﻿namespace Overlapp.Shared.Model
+﻿using Overlapp.Shared.Model.Domain;
+
+namespace Overlapp.Shared.Model
 {
 	public class OverlapRequest
 	{
 		private int Setter = -1;
 
 		public OverlapRequest() { }
-		public OverlapRequest(IMediaRecord a, IMediaRecord b)
+		public OverlapRequest(IMediaRecord a, IMediaRecord b) : this(new MediaContainer(a), new(b))
 		{
-			Items = new IMediaRecord[] { a, b };
 		}
 
-		public IMediaRecord?[] Items = new IMediaRecord[2]; // Capping at 2 items to intersect... 
+		public OverlapRequest(MediaContainer a, MediaContainer b)
+		{
+			Items = new MediaContainer[] { a, b };
+		}
 
-		public bool AddRequest(IMediaRecord r, int? index)
+		public MediaContainer?[] Items = new MediaContainer[2]; // Capping at 2 items to intersect... 
+
+		public bool AddRequest(IMediaRecord a, int? index)
+		{
+			return AddRequest(new MediaContainer(a), index);
+		}
+
+		public bool AddRequest(MediaContainer r, int? index)
 		{
 			// No changes if this item is already present.
 			if (HasItem(r))
@@ -32,11 +43,11 @@
 			return true;
 		}
 
-		public bool RemoveRequest(IMediaRecord r)
+		public bool RemoveRequest(MediaContainer r)
 		{
 			for (var i = 0; i < Items.Length; i++)
 			{
-				if (Items[i]?.id == r.id)
+				if (Items[i] == r)
 				{
 					Items[i] = null;
 					Setter = i - 1;
@@ -50,9 +61,14 @@
 
 		public bool IsReady => !Items.Any(a => a == null);
 		public bool IsEmpty => Items.All(a => a == null);
+
+		public bool HasItem(MediaContainer m)
+		{
+			return Items.Any(a => a != null && a == m);
+		}
 		public bool HasItem(IMediaRecord r)
 		{
-			return Items.Any(a => a != null && a.id == r.id);
+			return Items.Any(a => a?.Media != null && a.Media == r);
 		}
 	}
 }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Overlapp.Client;
 using Overlapp.Service;
 using Overlapp.Shared.Model;
+using Overlapp.Shared.Model.Domain;
 
 namespace Overlapp.Pages
 {
@@ -38,8 +39,8 @@ namespace Overlapp.Pages
 		{
 			if (AppState.Request.IsEmpty && !string.IsNullOrEmpty(ida) && !string.IsNullOrEmpty(idb))
 			{
-				var a = MediaIdentity.Create(ida);
-				var b = MediaIdentity.Create(idb);
+				var a = MediaIdentity.Parse(ida);
+				var b = MediaIdentity.Parse(idb);
 
 				var request = await ComparisonService.RequestBuild(a, b);
 				
@@ -58,7 +59,7 @@ namespace Overlapp.Pages
 			return new CreditAggregate[0];
 		}
 
-		private async Task ItemRemove(IMediaRecord record)
+		private async Task ItemRemove(MediaContainer record)
 		{
 			AppState.Request.RemoveRequest(record);
 			Navigation.NavigateTo("/search");

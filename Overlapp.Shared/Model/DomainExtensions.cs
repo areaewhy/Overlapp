@@ -2,7 +2,7 @@
 {
 	public static class DomainExtensions
 	{
-		public static CreditAggregate[] ToAggregateCredits(this TvAggregateCreditResponse credits, IMediaRecord media)
+		public static CreditAggregate[] ToAggregateCredits(this TvAggregateCreditResponse credits, MediaContainer media)
 		{
 			var crew = credits.crew.SelectMany(c => c.jobs.Select(j => new CreditAggregate(
 				Name: c.PersonName,
@@ -29,7 +29,7 @@
 			return Merge(crew, cast);
 		}
 
-		public static CreditAggregate[] ToAggregateCredits(this MovieCreditsResponse credits, IMediaRecord media)
+		public static CreditAggregate[] ToAggregateCredits(this MovieCreditsResponse credits, MediaContainer media)
 		{
 			var crew = credits.crew.Select(c => new CreditAggregate(
 				Name: c.PersonName,

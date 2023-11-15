@@ -1,0 +1,25 @@
+﻿@page "/test"
+
+<div class="d-flex justify-content-between flex-wrap">
+<div class="card">
+		<img class="card-img-top img-thumbnail" src="@Data.Image" />
+	<div class="card-body">
+		<h5 class="card-title">@Data.NameOrTitle</h5>
+		<p class="card-text">
+			<span>@Data.MediaType</span>
+			<span>@Data.ReleaseDate?.Year</span>
+		</p>
+	</div>
+</div>
+
+
+</div>
+
+@code {
+	IMediaRecord Data { get; set; }
+
+	protected async override Task OnInitializedAsync()
+	{
+		Data = new Model.EmptyMediaRecord("Star trek next generation", MediaType.Movie, "https://cdn.upmovies.to/MV5BMTkzY2Y3ZTMtYTg4Yy00OTNjLTlkNjctMGVlZDMwZWIxMzA0XkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_SX300.jpg", DateTime.Now);
+	}
+}

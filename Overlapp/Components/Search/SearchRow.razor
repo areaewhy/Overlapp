@@ -12,6 +12,6 @@
 		<div class="mb-4">@Media.ReleaseDate?.Year</div>
 	</div>
 	<div class="col-3 d-flex align-items-center">
-		<button class="btn @(AlreadyAdded ? "btn-primary" : "btn-outline-primary")" @onclick="async () => await SelectedClick.InvokeAsync(Media)">@(AlreadyAdded ? "Remove" : "Add")</button>
+		<button class="btn @(AlreadyAdded ? "btn-primary" : "btn-outline-primary")" @onclick="async () => await SelectedClick.InvokeAsync(new MediaContainer(Media))">@(AlreadyAdded ? "Remove" : "Add")</button>
 	</div>
 </div>

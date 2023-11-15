@@ -21,7 +21,7 @@ namespace Overlapp.Components
 		public AppStateService State { get; set; }
 
 		[Parameter]
-		public EventCallback<IMediaRecord> SelectedClick { get; set; }
+		public EventCallback<MediaContainer> SelectedClick { get; set; }
 
 		public string ImagePath(string not_found)
 		{

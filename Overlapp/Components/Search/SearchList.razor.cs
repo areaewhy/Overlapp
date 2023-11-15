@@ -19,7 +19,7 @@ namespace Overlapp.Components
 		public Func<string, int, Task<IApiPagedResponse<SearchMultiRecord>>> GetDataAsync { get; set; } = null!;
 
 		[Parameter]
-		public EventCallback<IMediaRecord> SelectClicked { get; set; }
+		public EventCallback<MediaContainer> SelectClicked { get; set; }
 
 		private bool IsBusy = true;
 		private string? _searchTerm;

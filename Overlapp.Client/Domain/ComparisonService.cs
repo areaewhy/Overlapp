@@ -28,14 +28,27 @@ namespace Overlapp.Client
 			return new OverlapResponse(request.Items, credits.FindIntersection());					
 		}
 
-		public async Task<CreditAggregate[]> CreditsGet(IMediaRecord media)
+		public async Task<CreditAggregate[]> CreditsGet(MediaContainer media)
 		{
-			switch (media.MediaType)
+			switch (media.Media.MediaType)
 			{
 				case MediaType.Tv:
-					return (await QueryService.TvCredits(media.id)).ToAggregateCredits(media);
+					if (media.SeasonId.HasValue && media.EpisodeId.HasValue)
+					{
+						// look up episode info
+						throw new NotImplementedException("Episode Cast not yet implemented");
+					}
+					else if (media.SeasonId.HasValue)
+					{
+						// look up season cast
+						throw new NotImplementedException("Season Cast not yet implemented");
+					}
+					else
+					{
+						return (await QueryService.TvCredits(media.Id)).ToAggregateCredits(media);
+					}
 				case MediaType.Movie:
-					return (await QueryService.MovieCredits(media.id)).ToAggregateCredits(media);
+					return (await QueryService.MovieCredits(media.Id)).ToAggregateCredits(media);
 			}
 
 			throw new Exception("Invalid credit request");

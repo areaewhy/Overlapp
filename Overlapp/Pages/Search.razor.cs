@@ -36,7 +36,7 @@ namespace Overlapp.Pages
 			FillingNumber = index;
 		}
 
-		private void ItemSelected(IMediaRecord record)
+		private void ItemSelected(MediaContainer record)
 		{
 			if (AppState.Request.HasItem(record))
 			{
@@ -65,7 +65,7 @@ namespace Overlapp.Pages
 			}
 		}
 
-		private void ItemRemove(IMediaRecord record)
+		private void ItemRemove(MediaContainer record)
 		{
 			AppState.Request.RemoveRequest(record);
 		}
