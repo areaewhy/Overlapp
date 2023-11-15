@@ -1,4 +1,5 @@
 ﻿using Overlapp.Shared.Model;
+using Overlapp.Shared.Model.Api;
 
 namespace Overlapp.Client
 {
@@ -14,5 +15,7 @@ namespace Overlapp.Client
 
 		Task<MovieDetailsResponse> MovieDetail(int movie_id);
 		Task<TvDetailsResponse> TvDetail(int series_id);
+		Task<SeasonDetailsResponse> TvSeasonDetail(int series_id, int season_number);
+		Task<EpisodeCreditsResponse> TvEpisodeCredits(int series_id, int season_number, int episode_number);
 	}
 }

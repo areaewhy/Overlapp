@@ -35,13 +35,11 @@ namespace Overlapp.Client
 				case MediaType.Tv:
 					if (media.SeasonId.HasValue && media.EpisodeId.HasValue)
 					{
-						// look up episode info
-						throw new NotImplementedException("Episode Cast not yet implemented");
+						return (await QueryService.TvEpisodeCredits(media.Id, media.SeasonId.Value, media.EpisodeId.Value)).ToAggregateCredits(media);
 					}
 					else if (media.SeasonId.HasValue)
 					{
-						// look up season cast
-						throw new NotImplementedException("Season Cast not yet implemented");
+						return (await QueryService.TvSeasonDetail(media.Id, media.SeasonId.Value)).ToAggregateCredits(media);
 					}
 					else
 					{
