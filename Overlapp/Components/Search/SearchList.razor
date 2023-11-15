@@ -2,12 +2,7 @@
 @using Microsoft.AspNetCore.Components.Forms
 
 <div class="container-fluid">
-	<div class="row mb-3">
-		<EditForm Model="Data" OnValidSubmit="Route" class="input-group">
-			<InputText @bind-Value="SearchTerm" class="input-group-text flex-grow-1" placeholder="Search for Tv or a Movie"></InputText>
-			<button disabled="@IsBusy" type="submit" class="btn btn-primary">?</button>
-		</EditForm>
-	</div>
+	<SearchForm SearchTerm="@SearchTerm" OnSearchSubmitted="Route"></SearchForm>
 
 	@if (IsBusy)
 	{
@@ -16,6 +11,7 @@
 	}
 	else if (Data?.results?.Any() ?? false)
 	{
+		<button class="btn btn-primary" @onclick="()=>Route()">New Search</button>
 		<ul class="list-group">
 			@foreach (var row in Data.results)
 			{
@@ -29,6 +25,7 @@
 	}
 	else if (!IsBusy && !string.IsNullOrWhiteSpace(SearchTerm))
 	{
+		<button class="btn btn-primary" @onclick="()=>Route()">New Search</button>
 		@:No Results for '@SearchTerm' :(
 	}
 

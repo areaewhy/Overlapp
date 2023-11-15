@@ -64,5 +64,11 @@ namespace Overlapp.Pages
 			AppState.Request.RemoveRequest(record);
 			Navigation.NavigateTo("/search");
 		}
+
+		private async Task ResetState()
+		{
+			AppState.Reset();
+			Navigation.NavigateTo("/search");
+		}
 	}
 }

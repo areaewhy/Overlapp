@@ -1,8 +1,5 @@
 ﻿.container > .row > div {
     border-color: var(--orange); 
-    border-width:3px;
-    border-style: solid;
-
 }
 .container > .row > div:first-child {
     border-color: var(--blue);

@@ -16,6 +16,9 @@ namespace Overlapp.Components
 		public EventCallback<MediaContainer> ItemRemoveClick { get; set; }
 
 		[Parameter]
-		public EventCallback<int> EmptySelected { get; set; }
+		public EventCallback<int> EmptySlotSelected { get; set; }
+
+		[Parameter]
+		public EventCallback ResetClicked { get; set; }
 	}
 }

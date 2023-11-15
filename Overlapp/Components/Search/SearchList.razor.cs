@@ -40,9 +40,10 @@ namespace Overlapp.Components
 			IsBusy = false;
 		}
 
-		private void Route()
+		private void Route(string term = "")
 		{
-			Navigation.NavigateTo($"/search/{SearchTerm}");
+			Data = new EmptyPagedResponse();
+			Navigation.NavigateTo($"/search/{term}");
 		}
 	}
 }

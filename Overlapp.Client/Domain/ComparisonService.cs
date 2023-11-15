@@ -29,7 +29,7 @@ namespace Overlapp.Client
 		}
 
 		public async Task<CreditAggregate[]> CreditsGet(MediaContainer media)
-		{
+		{	
 			switch (media.Media.MediaType)
 			{
 				case MediaType.Tv:

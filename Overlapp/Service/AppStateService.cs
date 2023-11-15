@@ -10,5 +10,10 @@ namespace Overlapp.Service
 		{
 			Request = r;
 		}
+
+		public void Reset()
+		{
+			Request = new OverlapRequest();
+		}
 	}
 }

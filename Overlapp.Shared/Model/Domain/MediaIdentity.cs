@@ -20,9 +20,11 @@ namespace Overlapp.Shared.Model
 
 		public override string ToString() => ToIdentifier(MediaType, Id, Season, Episode);
 
-		public static string ToIdentifier(MediaType t, int id, int? season, int? episode) => $"{t.ToString()[0]}{id}{MakeOptional(season)}{MakeOptional(episode)}";
+		public static string ToIdentifier(MediaType t, int id, int? season, int? episode) => $"{t.ToString()[0]}{MakeRequired(id)}{MakeOptional(season)}{MakeOptional(episode)}";
 
-		private static Func<int?, string> MakeOptional = (val) => val.HasValue ? $"-{val.Value.ToString("X")}" : "";
+		private static Func<int?, string> MakeRequired = (val) => $"{val}";
+		private static Func<int?, string> MakeOptional = (val) => MakePiece(val, '-');
+		private static Func<int?, char, string> MakePiece = (val, sep) => val.HasValue ? $"{sep}{val.Value}" : "";
 
 		public static string ToIdentifier(MediaContainer r) => ToIdentifier(r.Media.MediaType, r.Media.id, r.SeasonId, r.EpisodeId);
 
@@ -54,7 +56,7 @@ namespace Overlapp.Shared.Model
 			// helper to 1) make sure the index is valid, and 2) make sure it's a number!
 			Func<string[], int, int?> GetPiece = (parts, ix) =>
 			{
-				if (ix < parts.Length && int.TryParse(parts[ix], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var num))
+				if (ix < parts.Length && int.TryParse(parts[ix], out var num))
 				{
 					return num;
 				}
@@ -70,6 +72,7 @@ namespace Overlapp.Shared.Model
 					Id = GetPiece(chunks, 0)!.Value,
 					Season = GetPiece(chunks, 1),
 					Episode = GetPiece(chunks, 2),
+					MediaType = t,
 				};
 			}
 

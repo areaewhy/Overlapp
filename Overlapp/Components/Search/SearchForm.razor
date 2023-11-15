@@ -1,0 +1,26 @@
+﻿@namespace Overlapp.Components
+@using Microsoft.AspNetCore.Components.Forms
+
+<div class="row mb-3">
+		<EditForm Model="Model" OnValidSubmit="SearchSubmitted" class="input-group">
+			<InputText @bind-Value="SearchTerm" class="input-group-text flex-grow-1" placeholder="Search for Tv or a Movie"></InputText>
+			<button disabled="@IsBusy" type="submit" class="btn btn-primary">?</button>
+		</EditForm>
+	</div>
+
+@code {
+	private object Model = new { };
+
+	[Parameter]
+	public string SearchTerm { get; set; } = string.Empty;
+
+	[Parameter]
+	public EventCallback<string> OnSearchSubmitted { get; set; }
+
+	public bool IsBusy { get; set; }
+
+	private async Task SearchSubmitted()
+	{
+		await OnSearchSubmitted.InvokeAsync(SearchTerm);
+	}
+}
