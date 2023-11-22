@@ -1,0 +1,69 @@
+﻿@using Overlapp.Shared.Model.Api
+@namespace Overlapp.Components
+
+@if(Data != null)
+{
+	<div class="container">
+		<div class="row">
+			<div class="col-3">
+				<img class="img img-fluid p-2" src="@ImageConfiguration.MakeImage(Data.person)" />
+			</div>
+			<div class="col-9">
+				<h2>@Data.person.name</h2>
+				<p>
+					@Data.credit_type -
+					@Data.department - @Data.job
+				</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-3">
+				<img class="img img-fluid p-2" src="@ImageConfiguration.MakeImage(Data.media)" />
+			</div>
+			<div class="col-9">
+				<h4>@Data.media.NameOrTitle</h4>
+				<p>@Data.media.ReleaseDate?.Year</p>
+				<p>
+					@Data.media.overview
+				</p>
+			</div>
+		</div>
+		
+		<ul class="list-group">
+		@foreach(var episode in Data.media.episodes.OrderBy(a=>a.season_number).ThenBy(b=>b.episode_number))
+		{
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col">
+						<h6>@episode.name</h6>
+						<p>Season @episode.season_number | Episode @episode.episode_number</p>
+						<p>@episode.overview</p>
+					</div>
+				</div>
+			</li>
+		}
+		</ul>
+	</div>
+}
+
+else
+{
+	@:Loading ...
+}
+
+@code {
+
+	[Parameter]
+	public Func<Task<CreditDetailResponse>> FetchDetails { get; set; }
+
+	[CascadingParameter]
+	ImageConfiguration ImageConfiguration { get; set; }
+
+	public CreditDetailResponse? Data { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		Data = await FetchDetails();
+	}
+}

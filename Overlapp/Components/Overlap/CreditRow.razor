@@ -30,7 +30,9 @@
 										@($"{character.CharacterOrJob}")
 										@if(character.InstanceCount > 0 && character.Item?.Media?.MediaType == MediaType.Tv)
 										{
+											<a href="@($"credits/{character.CreditId}")">
 											@($" [ {character.InstanceCount} episode{(character.InstanceCount > 1 ? "s" : "")} ]")
+											</a>
 										}
 									</li>
 								}

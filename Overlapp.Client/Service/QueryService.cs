@@ -38,6 +38,13 @@ namespace Overlapp.Client
 			return await Get<TvAggregateCreditResponse>(url);
 		}
 
+		public async Task<CreditDetailResponse> CreditDetails(string credit_id)
+		{
+			// # https://developer.themoviedb.org/reference/credit-details
+			string url = $"3/credit/{credit_id}";
+			return await Get<CreditDetailResponse>(url);
+		}
+
 
 		public async Task<MovieCreditsResponse> MovieCredits(int movie_id)
 		{

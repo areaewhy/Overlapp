@@ -17,5 +17,6 @@ namespace Overlapp.Client
 		Task<TvDetailsResponse> TvDetail(int series_id);
 		Task<SeasonDetailsResponse> TvSeasonDetail(int series_id, int season_number);
 		Task<EpisodeCreditsResponse> TvEpisodeCredits(int series_id, int season_number, int episode_number);
+		Task<CreditDetailResponse> CreditDetails(string credit_id);
 	}
 }

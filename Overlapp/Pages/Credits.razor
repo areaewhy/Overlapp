@@ -1,0 +1,26 @@
+﻿@page "/credits/{credit_id}"
+@using Overlapp.Shared.Model.Api
+@inject IQueryService QueryService;
+@inject ImageConfigurationService ImageConfigurationService
+
+<CascadingValue Value="ImageConfiguration">
+<CreditDetail FetchDetails="FetchCreditDetails"></CreditDetail>
+</CascadingValue>
+
+
+@code {
+	[Parameter]
+	public string credit_id { get; set; }
+
+	private ImageConfiguration ImageConfiguration;
+
+	protected override async Task OnInitializedAsync()
+	{
+		ImageConfiguration = await ImageConfigurationService.Configuration;
+	}
+
+	private async Task<CreditDetailResponse> FetchCreditDetails()
+	{
+		return await QueryService.CreditDetails(credit_id);
+	}
+}
