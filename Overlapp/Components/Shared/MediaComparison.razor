@@ -9,12 +9,12 @@
 			MediaContainer? item = Data[i];
 			
 
-			<div style="height:100%; width:30vw; height:20vh; max-height:300px; max-width:300px; border-width:3px; border-style:solid;" class="d-flex flex-column justify-content-center text-center p-2 position-relative">
+			<div style="height:100%; width:30vw; height:30vh; max-height:300px; max-width:300px; border-width:3px; border-style:solid;" class="d-flex flex-column justify-content-center text-center p-2 position-relative">
 				@if(item != null)
 				{
 					IMediaRecord? media = item.Media;
 
-					<div style="height:80%;">
+					<div style="height:70%;">
 						@{
 							string src = media == null ? "no-image-available.svg" : ImageConfiguration.MakeImage(media) ?? "no-image-available.svg";
 							<img class="img-fluid" style="height:100%" src="@src" />
@@ -23,6 +23,14 @@
 					<p style="height:20%; margin:0;" class="text-truncate">
 						<small>@(media?.NameOrTitle)</small>
 					</p>
+					@if (item.EpisodeId.HasValue && item.SeasonId.HasValue)
+					{
+						<span>@($"S{item.SeasonId.Value.ToString("D2")}E{item.EpisodeId.Value.ToString("D2")}")</span>
+					}
+					else
+					{
+						<span></span>
+					}
 					@* <button style="position:absolute; top:-5px; left:-15px; width:30px; height:30px;" class="rounded-circle bg-danger text-white border-0" @onclick="() => ItemRemoveClick.InvokeAsync(item)">X</button> *@
 					<button class="btn btn-outline-danger" @onclick="() => ItemRemoveClick.InvokeAsync(item)">Remove</button>
 				}

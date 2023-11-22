@@ -4,26 +4,33 @@
 
 @if (Data != null)
 {
+	<b>Season</b>
 	for (int i = 0; i < Data.number_of_seasons; i++)
 	{
 		int season = i;
-		<button @onclick="() => season_filter = season">@(season + 1)</button>
+		<button class="btn m-1 @(season == season_filter ? "btn-primary" : "btn-outline-primary")" @onclick="() => season_filter = season">@(season + 1)</button>
 	}
 
+	<button class="btn btn-danger" @onclick="Reset">cancel</button>
 	if (season_filter.HasValue)
 	{
-		<div class="row">
+		<div>
+			<b>Episode</b>
 			@for(int i = 1; i <= Data.seasons[season_filter.Value].episode_count; i++)
 			{
 				int episode = i;
-				<button @onclick="() => OnEpisodeSelected.InvokeAsync((Data, season_filter.Value, episode))">@episode</button>
+				<button class="btn btn-outline-info m-1" @onclick="async () => await EpisodeSelected((Data, season_filter.Value, episode))">@episode</button>
 			}
 		</div>
 	}
 }
+else if (IsBusy)
+{
+	<div class="spinner-grow"></div>
+}
 else
 {
-	<button @onclick="GetDetails">Choose Episode</button>
+	<button class="btn btn-outline-dark mt-1" @onclick="GetDetails">Choose Episode</button>
 }
 
 @code {
@@ -37,18 +44,34 @@ else
 	[Parameter]
 	public EventCallback<(IMediaRecord media, int season, int episode)> OnEpisodeSelected { get; set; }
 
+	private async Task EpisodeSelected((IMediaRecord media, int season, int episode) selection)
+	{
+		await OnEpisodeSelected.InvokeAsync(selection);
+		Reset();
+	}
 	private TvDetailsResponse? Data { get; set; }
 
 	int? season_filter;
 
 	protected override void OnInitialized()
 	{
-		FetchDetails = FetchSeriesDetails;
+
+	}
+
+	private bool IsBusy { get; set; }
+
+	private void Reset()
+	{
+		season_filter = null;
+		Data = null;
+
 	}
 
 	async Task GetDetails()
 	{
+		IsBusy = true;
 		Data = await FetchDetails(series_id);
+		IsBusy = false;
 	}
 
 	async Task<TvDetailsResponse> FetchSeriesDetails(int series_id)

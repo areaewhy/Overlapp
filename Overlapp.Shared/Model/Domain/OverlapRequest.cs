@@ -26,7 +26,7 @@ namespace Overlapp.Shared.Model
 		public bool AddRequest(MediaContainer r, int? index)
 		{
 			// No changes if this item is already present.
-			if (HasItem(r))
+			if (HasSpecificItem(r))
 				return false;
 
 			if (index != null)
@@ -47,7 +47,7 @@ namespace Overlapp.Shared.Model
 		{
 			for (var i = 0; i < Items.Length; i++)
 			{
-				if (Items[i] == r)
+				if (Items[i]?.Id == r.Id)
 				{
 					Items[i] = null;
 					Setter = i - 1;
@@ -62,13 +62,18 @@ namespace Overlapp.Shared.Model
 		public bool IsReady => !Items.Any(a => a == null);
 		public bool IsEmpty => Items.All(a => a == null);
 
-		public bool HasItem(MediaContainer m)
+		public bool HasSpecificItem(MediaContainer m)
 		{
 			return Items.Any(a => a != null && a == m);
 		}
+
+		public bool HasItem(MediaContainer m)
+		{
+			return Items.Any(a => a != null && a.Id == m.Id);
+		}
 		public bool HasItem(IMediaRecord r)
 		{
-			return Items.Any(a => a?.Media != null && a.Media == r);
+			return Items.Any(a => a?.Media != null && a.Id == r.id);
 		}
 
 	}
