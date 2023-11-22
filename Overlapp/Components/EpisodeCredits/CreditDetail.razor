@@ -29,9 +29,20 @@
 				</p>
 			</div>
 		</div>
-		
+		<div class="m-2">
+		@{
+			var seasons = Data.media.episodes.Select(s => s.season_number).Distinct();
+			<h3>Seasons</h3>
+			foreach(var s in seasons)
+			{
+				bool disabled = s == season_filter;
+
+				<a class="btn @(s == season_filter ? "btn-primary" : "")" @onclick="() => season_filter = s">@s</a>
+			}
+		}
+		</div>
 		<ul class="list-group">
-		@foreach(var episode in Data.media.episodes.OrderBy(a=>a.season_number).ThenBy(b=>b.episode_number))
+		@foreach(var episode in Data.media.episodes.Where(s => s.season_number == season_filter).OrderBy(a=>a.season_number).ThenBy(b=>b.episode_number))
 		{
 			<li class="list-group-item">
 				<div class="row">
@@ -62,8 +73,11 @@ else
 
 	public CreditDetailResponse? Data { get; set; }
 
+	int? season_filter;
+
 	protected override async Task OnInitializedAsync()
 	{
 		Data = await FetchDetails();
+		season_filter = Data?.media?.episodes.FirstOrDefault()?.season_number;
 	}
 }
