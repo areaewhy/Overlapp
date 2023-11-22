@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Components.Forms
 
 <div class="container-fluid">
-	<SearchForm SearchTerm="@SearchTerm" OnSearchSubmitted="Route"></SearchForm>
+	<SearchForm SearchTerm="@SearchTerm" OnSearchSubmitted="(x) => Route(x)"></SearchForm>
 
 	@if (IsBusy)
 	{

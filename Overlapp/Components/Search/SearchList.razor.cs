@@ -49,6 +49,11 @@ namespace Overlapp.Components
 
 		private void Route(string term = "")
 		{
+			if (string.Equals(term?.Trim(), SearchTerm?.Trim(), StringComparison.InvariantCultureIgnoreCase))
+			{
+				return;
+			}
+
 			Data = new EmptyPagedResponse();
 			Navigation.NavigateTo($"/search/{term}");
 		}
