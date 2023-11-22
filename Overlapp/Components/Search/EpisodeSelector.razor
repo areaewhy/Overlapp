@@ -1,0 +1,59 @@
+﻿@namespace Overlapp.Components
+@inject IQueryService QueryService;
+
+
+@if (Data != null)
+{
+	for (int i = 0; i < Data.number_of_seasons; i++)
+	{
+		int season = i;
+		<button @onclick="() => season_filter = season">@(season + 1)</button>
+	}
+
+	if (season_filter.HasValue)
+	{
+		<div class="row">
+			@for(int i = 1; i <= Data.seasons[season_filter.Value].episode_count; i++)
+			{
+				int episode = i;
+				<button @onclick="() => OnEpisodeSelected.InvokeAsync((Data, season_filter.Value, episode))">@episode</button>
+			}
+		</div>
+	}
+}
+else
+{
+	<button @onclick="GetDetails">Choose Episode</button>
+}
+
+@code {
+
+	[Parameter]
+	public int series_id { get; set; }
+
+	[Parameter]
+	public Func<int, Task<TvDetailsResponse>> FetchDetails { get; set; }
+
+	[Parameter]
+	public EventCallback<(IMediaRecord media, int season, int episode)> OnEpisodeSelected { get; set; }
+
+	private TvDetailsResponse? Data { get; set; }
+
+	int? season_filter;
+
+	protected override void OnInitialized()
+	{
+		FetchDetails = FetchSeriesDetails;
+	}
+
+	async Task GetDetails()
+	{
+		Data = await FetchDetails(series_id);
+	}
+
+	async Task<TvDetailsResponse> FetchSeriesDetails(int series_id)
+	{
+		return await QueryService.TvDetail(series_id);
+	}
+
+}

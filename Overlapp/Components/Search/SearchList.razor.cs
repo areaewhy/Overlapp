@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Overlapp.Client;
 using Overlapp.Model;
 using Overlapp.Shared.Model;
 
@@ -20,6 +21,12 @@ namespace Overlapp.Components
 
 		[Parameter]
 		public EventCallback<MediaContainer> SelectClicked { get; set; }
+
+		[Parameter]
+		public EventCallback<(IMediaRecord media, int season, int episode)> OnEpisodeSelected { get; set; }
+
+		[Parameter]
+		public Func<int, Task<TvDetailsResponse>> FetchTvDetails { get; set; }
 
 		private bool IsBusy = true;
 		private string? _searchTerm;

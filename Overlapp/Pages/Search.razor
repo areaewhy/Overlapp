@@ -4,7 +4,11 @@
 <CascadingValue Value="ImageConfiguration">
 	<MediaComparison Data="AppState.Request.Items" ItemRemoveClick="ItemRemove" EmptySlotSelected="EmptySelected"></MediaComparison>
 	<div class="position-relative mt-3">
-		<SearchList GetDataAsync="FetchDataAsync" SearchTerm="@SearchTerm" SelectClicked="ItemSelected"></SearchList>
+		<SearchList GetDataAsync="FetchDataAsync"
+					SearchTerm="@SearchTerm"
+					SelectClicked="ItemSelected"
+					OnEpisodeSelected="OnEpisodeSelected"
+					FetchTvDetails="FetchTvDetails"></SearchList>
 	</div>
-	
+
 </CascadingValue>

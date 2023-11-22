@@ -18,6 +18,9 @@
 				var media = (IMediaRecord)row;
 				<li class="list-group-item border m-1">
 					<SearchRow Media="media" SelectedClick="SelectClicked"></SearchRow>
+					@if (row.MediaType == MediaType.Tv){
+						<EpisodeSelector series_id="row.id" OnEpisodeSelected="OnEpisodeSelected" FetchDetails="FetchTvDetails"></EpisodeSelector>
+					}
 				</li>
 			}
 		</ul>

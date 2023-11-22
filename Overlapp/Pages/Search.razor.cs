@@ -47,6 +47,12 @@ namespace Overlapp.Pages
 				AppState.Request.AddRequest(record, FillingNumber);
 			}
 
+			SelectionMade();
+			
+		}
+
+		private void SelectionMade()
+		{
 			if (AppState.Request.IsReady)
 			{
 				var ids = AppState.Request.Items.Select(m => MediaIdentity.ToIdentifier(m)).ToArray();
@@ -68,6 +74,24 @@ namespace Overlapp.Pages
 		private void ItemRemove(MediaContainer record)
 		{
 			AppState.Request.RemoveRequest(record);
+		}
+
+		private async Task<TvDetailsResponse> FetchTvDetails(int series_id)
+		{
+			return await QueryService.TvDetail(series_id);
+		}
+
+		private void OnEpisodeSelected((IMediaRecord media, int season, int episode) selected)
+		{
+			var target = new MediaContainer(selected.media)
+			{
+				EpisodeId = selected.episode,
+				SeasonId = selected.season
+			};
+
+			AppState.Request.AddRequest(target, FillingNumber);
+
+			SelectionMade();
 		}
 	}
 }
