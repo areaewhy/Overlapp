@@ -72,8 +72,14 @@ namespace Overlapp.Shared.Model.Domain
 				collections[0] = collections[0].Intersect(collections[++j]).ToHashSet();
 			}
 
-			var consolidatedCredits = credits.SelectMany(t => t.Where(m => collections[0].Contains(m.id)));
-			var intersection = consolidatedCredits.OrderBy(a => a.Department).ThenByDescending(t => t.InstanceCount).ToArray();
+			var consolidatedCredits = credits
+				.SelectMany(t => t.Where(m => collections[0].Contains(m.id)));
+
+			var intersection = consolidatedCredits
+				.OrderBy(f => f.Item?.Id)
+				.ThenBy(a => a.Department)
+				.ThenByDescending(t => t.InstanceCount)
+				.ToArray();
 
 			return intersection;
 		}

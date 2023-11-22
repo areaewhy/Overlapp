@@ -27,7 +27,11 @@
 								{
 
 									<li class="ms-4">
-										@($"{character.CharacterOrJob}{(character.InstanceCount > 0 ? $" [ {character.InstanceCount} episodes ]" : "")}")
+										@($"{character.CharacterOrJob}")
+										@if(character.InstanceCount > 0 && character.Item?.Media?.MediaType == MediaType.Tv)
+										{
+											@($" [ {character.InstanceCount} episode{(character.InstanceCount > 1 ? "s" : "")} ]")
+										}
 									</li>
 								}
 							</ul>

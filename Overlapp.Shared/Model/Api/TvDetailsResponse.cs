@@ -14,7 +14,7 @@
 	}
 
 	public record CreatedBy(int id, string credit_id, string name, int gender, string profile_path);
-	public record Episode(int id, string name, string overview, float vote_average, int vote_count, string air_date, int episode_number, string production_code, int runtime, int season_number, int show_id, string still_path);
+	public record Episode(int id, string name, string overview, float vote_average, int vote_count, string air_date, int episode_number, string production_code, int? runtime, int season_number, int show_id, string still_path);
 	public record Network(int id, string logo_path, string name, string origin_country);
 	public record Season(string air_date, int episode_count, int id, string name, string overview, string poster_path, int season_number, float vote_average);
 }
