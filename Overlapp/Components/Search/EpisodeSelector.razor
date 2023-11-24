@@ -5,10 +5,10 @@
 @if (Data != null)
 {
 	<b>Season</b>
-	for (int i = 0; i < Data.number_of_seasons; i++)
+	for (int i = 1; i <= Data.number_of_seasons; i++)
 	{
 		int season = i;
-		<button class="btn m-1 @(season == season_filter ? "btn-primary" : "btn-outline-primary")" @onclick="() => season_filter = season">@(season + 1)</button>
+		<button class="btn m-1 @(season == season_filter ? "btn-primary" : "btn-outline-primary")" @onclick="() => season_filter = season">@(season)</button>
 	}
 
 	<button class="btn btn-danger" @onclick="Reset">cancel</button>
@@ -16,7 +16,7 @@
 	{
 		<div>
 			<b>Episode</b>
-			@for(int i = 1; i <= Data.seasons[season_filter.Value].episode_count; i++)
+			@for(int i = 1; i <= Data.seasons[season_filter.Value - 1].episode_count; i++)
 			{
 				int episode = i;
 				<button class="btn btn-outline-info m-1" @onclick="async () => await EpisodeSelected((Data, season_filter.Value, episode))">@episode</button>
