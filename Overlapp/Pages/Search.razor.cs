@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Overlapp.Client;
 using Overlapp.Service;
 using Overlapp.Shared.Model;
+using Overlapp.Shared.Model.Api;
 
 namespace Overlapp.Pages
 {
@@ -92,6 +93,12 @@ namespace Overlapp.Pages
 			AppState.Request.AddRequest(target, FillingNumber);
 
 			SelectionMade();
+		}
+
+		private async Task<EpisodeWithCredits[]> FetchSeasonDetails(IMediaRecord media, int season)
+		{
+			var data = await QueryService.TvSeasonDetail(media.id, season);
+			return data.episodes;
 		}
 	}
 }

@@ -19,7 +19,7 @@
 				<li class="list-group-item border m-1">
 					<SearchRow Media="media" SelectedClick="SelectClicked"></SearchRow>
 					@if (row.MediaType == MediaType.Tv){
-						<EpisodeSelector series_id="row.id" OnEpisodeSelected="OnEpisodeSelected" FetchDetails="FetchTvDetails"></EpisodeSelector>
+						<EpisodeSelector series_id="row.id" OnEpisodeSelected="OnEpisodeSelected" FetchDetails="FetchTvDetails" FetchSeasonDetails="FetchSeasonDetails"></EpisodeSelector>
 					}
 				</li>
 			}

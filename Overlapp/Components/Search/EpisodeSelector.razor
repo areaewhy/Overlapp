@@ -1,4 +1,5 @@
 ﻿@namespace Overlapp.Components
+@using Overlapp.Shared.Model.Api
 @inject IQueryService QueryService;
 
 
@@ -8,19 +9,33 @@
 	for (int i = 1; i <= Data.number_of_seasons; i++)
 	{
 		int season = i;
-		<button class="btn m-1 @(season == season_filter ? "btn-primary" : "btn-outline-primary")" @onclick="() => season_filter = season">@(season)</button>
+		<button class="btn m-1 @(season == season_filter ? "btn-primary" : "btn-outline-primary")" @onclick="async () => await SeasonSelect(Data, season)">@(season)</button>
 	}
 
 	<button class="btn btn-danger" @onclick="Reset">cancel</button>
 	if (season_filter.HasValue)
 	{
+
 		<div>
 			<b>Episode</b>
-			@for(int i = 1; i <= Data.seasons[season_filter.Value - 1].episode_count; i++)
+			<ul class="list-group">
+			@if (Episodes != null)
 			{
-				int episode = i;
-				<button class="btn btn-outline-info m-1" @onclick="async () => await EpisodeSelected((Data, season_filter.Value, episode))">@episode</button>
+				
+					@for (int i = 0; i < Episodes.Length; i++)
+					{
+						var episode = Episodes[i];
+						<li class="list-group-item d-flex justify-content-between">
+							<span class="align-items-center">@episode.episode_number: @episode.name</span><span><button class="btn btn-outline-info m-1" @onclick="async () => await EpisodeSelected((Data, season_filter.Value, episode.episode_number))">+</button></span>
+						</li>
+					}
+				
 			}
+			else
+			{
+				<li class="spinner-grow-sm"></li>
+			}
+			</ul>
 		</div>
 	}
 }
@@ -42,6 +57,9 @@ else
 	public Func<int, Task<TvDetailsResponse>> FetchDetails { get; set; }
 
 	[Parameter]
+	public Func<IMediaRecord, int, Task<EpisodeWithCredits[]>> FetchSeasonDetails { get; set; }
+
+	[Parameter]
 	public EventCallback<(IMediaRecord media, int season, int episode)> OnEpisodeSelected { get; set; }
 
 	private async Task EpisodeSelected((IMediaRecord media, int season, int episode) selection)
@@ -50,6 +68,8 @@ else
 		Reset();
 	}
 	private TvDetailsResponse? Data { get; set; }
+
+	private EpisodeWithCredits[]? Episodes { get; set; }
 
 	int? season_filter;
 
@@ -64,7 +84,14 @@ else
 	{
 		season_filter = null;
 		Data = null;
+		Episodes = null;
+	}
 
+	private async Task SeasonSelect(IMediaRecord media, int season)
+	{
+		season_filter = season;
+		Episodes = null;
+		Episodes = await FetchSeasonDetails(media, season);
 	}
 
 	async Task GetDetails()

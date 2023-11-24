@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Overlapp.Client;
 using Overlapp.Model;
 using Overlapp.Shared.Model;
+using Overlapp.Shared.Model.Api;
 
 namespace Overlapp.Components
 {
@@ -27,6 +28,10 @@ namespace Overlapp.Components
 
 		[Parameter]
 		public Func<int, Task<TvDetailsResponse>> FetchTvDetails { get; set; }
+
+		[Parameter]
+		public Func<IMediaRecord, int, Task<EpisodeWithCredits[]>> FetchSeasonDetails { get; set; }
+
 
 		private bool IsBusy = true;
 		private string? _searchTerm;
